@@ -48,7 +48,7 @@ def getOriginalValues(fileID, column, targetPathGOV):
 ##
 #   time scaling methods:
 #   percentage (PCT)
-#   Equivalent Rectangular Bandwith (ERB)
+#   syllabic adjustment
 #
 
 
@@ -117,17 +117,21 @@ def mvtDetectionScan(foList, fileNameMDS):
             #print "-------->", x, "at" ,i, "is H"
         prevScan = scanCheck
     mvtRaw = dict(zip(indexList, valueList))
-    print "there are", listLength, "points in the sample."
-    print len(mvtRaw), "turning points were found in the sample."
-    print mvtRaw
+    #print "there are", listLength, "points in the sample."
+    #print len(mvtRaw), "turning points were found in the sample."
+    #print mvtRaw
+
     if printConfig.graphOutput == "y":
         printGraph(indexList, valueList, fileNameMDS)
+
+    return mvtRaw
 
 ######################################################################
 ##
 #   FOLDER PROCESSING
 #
 def folderModeProcessing(targetFolder, chosenScaling):
+    processedCurvesDataBase = []
     listing = os.listdir(targetFolder)
     print "folder: ", targetFolder
     for fileName in listing:
@@ -138,8 +142,12 @@ def folderModeProcessing(targetFolder, chosenScaling):
         elif chosenScaling == "PCT":
             ffScaled = scalePCT(foData)
         #print ffScaled
-        mvtDetectionScan(ffScaled, fileName)
-
+        processedCurve = mvtDetectionScan(ffScaled, fileName)
+        #print processedCurve
+        processedCurvesDataBase.append(processedCurve)
+    for eachFile in processedCurvesDataBase:
+        print len(eachFile)
+    print len(processedCurvesDataBase) , "files were processed successfully!"
 ######################################################################
 ##
 #   subject fo range analysis

@@ -138,10 +138,12 @@ def editVariablePanel():
 
 def getFolderPath():
     while not os.path.isdir(printConfig.folderPath):
+        # auto-complete path
         readline.set_completer_delims(' \t\n;')
         readline.parse_and_bind("tab: complete")
         readline.set_completer(complete)
         printConfig.folderPath = raw_input("\n\tType in the path to the folder:\n\t> ")
+        # add missing final slash if needed
         if printConfig.folderPath.endswith("/"):
             continue
         else:
