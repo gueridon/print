@@ -12,7 +12,7 @@ import  sys, os, csv, pylab, math
 #
 def printGraph(xValues,yValues, fileNamePG):
     sample_tag = os.path.splitext(fileNamePG)[0]
-    print "SAMPLETAG = ", sample_tag
+    print("SAMPLETAG = ", sample_tag)
     #print len (yValues)
     pylab.figure(sample_tag)
     pylab.plot(xValues, yValues, linewidth = 2, color='k')
@@ -28,7 +28,7 @@ def printGraph(xValues,yValues, fileNamePG):
         pylab.ylabel('fo in %')
         pylab.title('Sample %s (percentage scaling)' % sample_tag)
         pylab.savefig('PCT_'+ sample_tag)
-    print "\n-> graph for sample %s was saved to directory \n" % sample_tag
+    print("\n-> graph for sample %s was saved to directory \n" % sample_tag)
 
 ######################################################################
 ##
@@ -133,7 +133,7 @@ def mvtDetectionScan(foList, fileNameMDS):
 def folderModeProcessing(targetFolder, chosenScaling):
     processedCurvesDataBase = []
     listing = os.listdir(targetFolder)
-    print "folder: ", targetFolder
+    print("folder: ", targetFolder)
     for fileName in listing:
         timeData = getOriginalValues(fileName, 0, targetFolder)
         foData = getOriginalValues(fileName, 1, targetFolder)
@@ -146,8 +146,8 @@ def folderModeProcessing(targetFolder, chosenScaling):
         #print processedCurve
         processedCurvesDataBase.append(processedCurve)
     for eachFile in processedCurvesDataBase:
-        print len(eachFile)
-    print len(processedCurvesDataBase) , "files were processed successfully!"
+        print(len(eachFile))
+    print(len(processedCurvesDataBase) , "files were processed successfully!")
 ######################################################################
 ##
 #   subject fo range analysis
