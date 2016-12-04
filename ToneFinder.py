@@ -15,11 +15,21 @@ class ContourFromCsv(DataFromCsv):
 
     number_of_frames = 2.0
 
-    def getTimeValues(self):
+    def getRawTimeValues(self):
         return self.csvToLists()[0]
 
-    def getFoValues(self):
+    def getTimeValues(self):
+        time_list = self.getRawTimeValues()
+        in_range_list = self.trimSampleIndex()
+        return [x for x in time_list if time_list.index(x) in in_range_list ]
+
+    def getRawFoValues(self):
         return self.csvToLists()[1]
+
+    def getFoValues(self):
+        fo_list = self.getRawFoValues()
+        in_range_list = self.trimSampleIndex()
+        return [x for x in fo_list if fo_list.index(x) in in_range_list ]
 
     def getFoStats(self):
         mean_fo = sum(self.getFoValues()) / float(len(self.getFoValues()))
@@ -66,6 +76,19 @@ class ContourFromCsv(DataFromCsv):
             frame_list.append(float(frameboundary))
         return frame_list
 
+    def trimSampleIndex(self):
+        time = self.getRawTimeValues()
+        boundaries = self.getFrameBoundaries(2)
+        origin_sample = boundaries[0]
+        end_sample = boundaries[-1]
+        #print(origin_sample, end_sample)
+        trimmed_index_list = []
+        for item in time:
+            if item >= origin_sample and item <= end_sample:
+                index_item = time.index(item)
+                trimmed_index_list.append(index_item)
+        return trimmed_index_list
+
 ######################################################################
 ##
 #   fo scaling methods:
@@ -88,7 +111,7 @@ class ContourFromCsv(DataFromCsv):
 #   general movement detection tool
 #
     def mvtDetectionScan(self):
-        fo_list = self.getFoValues()
+        fo_list = self.scalePCT()
         list_length = len(fo_list)
         init = fo_list[0]
         prev_scan = 0
@@ -130,9 +153,14 @@ class ContourFromCsv(DataFromCsv):
         sorted_mvt_dict = OrderedDict(sorted(mvt_dict.items()))
         print(self.getTokenTag() + " has " + str(len(mvt_dict)) + " turning points.")
         mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/demo_data.php"
+        row_count = 0
         with open(mydata, 'w') as myphpfile:
             for attribute, value in sorted_mvt_dict.items():
-                row = "L " + str(attribute) + " " + str(round(320 - value,1)) + "\n"
+                row_count +=1
+                if row_count > 1:
+                    row = "L " + str(attribute*3) + " " + str(round(200 - value*2,1)) + "\n"
+                else:
+                    row = "M " + str(attribute*3) + " " + str(round(200 - value*2,1)) + "\n"
                 myphpfile.write(row)
         for attribute, value in sorted_mvt_dict.items():
             print('L {} {}'.format(attribute, round(320 - value,0)))
@@ -146,12 +174,13 @@ class ContourFromCsv(DataFromCsv):
 
 
 """ TESTING """
-token = ContourFromCsv("./EM/foCsv/EM1.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM9.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
 print(token.scalePCT())
 print(token.scaleERB())
-#print(token.getTimeValues())
+#print("RAW", token.getRawTimeValues())
+#print("TRIMMED", token.getTimeValues())
 table_data = [
     [token.getTokenTag(), ''],
     ['fo stats', (round(token.getFoStats()[0],2),round(token.getFoStats()[1],2),round(token.getFoStats()[2],2))],
@@ -166,4 +195,6 @@ print(table.table)
 print("frame list: ", token.getFrameBoundaries(2.0))
 print(token.retrieveSpans())
 print(token.mvtDetectionScan())
-a = token.printMvtDetectionScan()
+
+
+token.printMvtDetectionScan()

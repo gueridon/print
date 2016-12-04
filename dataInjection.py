@@ -12,6 +12,7 @@ class DataFromCsv:
         tag = os.path.splitext(base)[0]
         return tag
 
+
     # Contours saved as two-column csv files (time, fo)
     def csvToLists(self):
         time_list = []
@@ -37,6 +38,7 @@ class DataFromCsv:
         return spans_list
 
     def getStartTime(self):
+
         with open(self.origins, mode='rU') as f:
             reader = csv.reader(f,delimiter='\t')
             next(reader)
