@@ -37,6 +37,11 @@ class ContourFromCsv(DataFromCsv):
         min_fo = min(self.getFoValues())
         return mean_fo, max_fo, min_fo
 
+    def getTimeStats(self):
+        max_time = max(self.getTimeValues())
+        min_time = min(self.getTimeValues())
+        return max_time, min_time
+
     def overallDurations(self):
         sample_duration =  max(self.getTimeValues()) - min(self.getTimeValues())
 
@@ -95,27 +100,51 @@ class ContourFromCsv(DataFromCsv):
 #   percentage (PCT)
 #   Equivalent Rectangular Bandwith (ERB)
 #
-    def scalePCT(self):
-        min_fo = self.getFoStats()[2] - 10 # Baseline is set to n points under actual value
+    def scaleFoPCT(self):
+        min_fo = self.getFoStats()[2] # Baseline is set to n points under actual value
         max_fo = self.getFoStats()[1]
         range_fo = max_fo - min_fo
         fo_list_scaled = [round((item - min_fo) * (100.0/range_fo),0) for item in self.getFoValues()]
         return fo_list_scaled
 
-    def scaleERB(self):
+    def scaleFoERB(self):
         fo_list_scaled = [round((21.4 * math.log10((0.00437 * item) +1))*10,0) for item in self.getFoValues()]
         return fo_list_scaled
+######################################################################
+##
+#   time scaling methods:
+#   percentage (PCT)
+#   pretones - isometric grid
+#
+    def scaleTimePCT(self):
+        min_time = self.getTimeStats()[1] # Baseline is set to n points under actual value
+        max_time = self.getTimeStats()[0]
+        range_time = max_time - min_time
+        time_list_scaled = [round((item - min_time) * (100.0/range_time),0) for item in self.getTimeValues()]
+        return time_list_scaled
+
+    def scaleTimeIsometric(self):
+
+
+
+
+
+
+
+
+
 
 ######################################################################
 ##
 #   general movement detection tool
 #
     def mvtDetectionScan(self):
-        fo_list = self.scalePCT()
+        fo_list = self.scaleFoPCT()
+        time_list = self.scaleTimePCT()
         list_length = len(fo_list)
         init = fo_list[0]
         prev_scan = 0
-        value_list = [fo_list[0]]
+        fo_mvt_list = [fo_list[0]]
         index_list = [fo_list.index(fo_list[0])]
         for i,  x in enumerate(fo_list):
             #this compare each value in the list to the next
@@ -133,23 +162,25 @@ class ContourFromCsv(DataFromCsv):
                     scan_check = 0
                 elif x > fo_list[i-1]:
                     scan_check = 1
-                value_list.append(x)
+                fo_mvt_list.append(x)
                 index_list.append(i)
             # this keeps track of the movement and finds raw H and L points.
             if scan_check == prev_scan:
                 continue
             elif scan_check == 0 and prev_scan == 1:
-                value_list.append(x)
+                fo_mvt_list.append(x)
                 index_list.append(i)
             elif scan_check == 1 and prev_scan == 0:
-                value_list.append(x)
+                fo_mvt_list.append(x)
                 index_list.append(i)
             prev_scan = scan_check
-        mvt_raw = dict(zip(index_list, value_list))
-        return mvt_raw
+
+        time_mvt_list = [x for x in time_list if time_list.index(x) in index_list ]
+        mvt_raw = dict(zip(time_mvt_list, fo_mvt_list))
+        return mvt_raw, index_list
 
     def printMvtDetectionScan(self):
-        mvt_dict = self.mvtDetectionScan()
+        mvt_dict = self.mvtDetectionScan()[0]
         sorted_mvt_dict = OrderedDict(sorted(mvt_dict.items()))
         print(self.getTokenTag() + " has " + str(len(mvt_dict)) + " turning points.")
         mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/demo_data.php"
@@ -158,9 +189,9 @@ class ContourFromCsv(DataFromCsv):
             for attribute, value in sorted_mvt_dict.items():
                 row_count +=1
                 if row_count > 1:
-                    row = "L " + str(attribute*3) + " " + str(round(200 - value*2,1)) + "\n"
+                    row = "L " + str(attribute) + " " + str(round(200 - value,1)) + "\n"
                 else:
-                    row = "M " + str(attribute*3) + " " + str(round(200 - value*2,1)) + "\n"
+                    row = "M " + str(attribute) + " " + str(round(200 - value,1)) + "\n"
                 myphpfile.write(row)
         for attribute, value in sorted_mvt_dict.items():
             print('L {} {}'.format(attribute, round(320 - value,0)))
@@ -174,11 +205,14 @@ class ContourFromCsv(DataFromCsv):
 
 
 """ TESTING """
-token = ContourFromCsv("./EM/foCsv/EM9.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM32.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
-print(token.scalePCT())
-print(token.scaleERB())
+print(token.scaleFoPCT())
+#print(token.scaleFoERB())
+print(token.scaleTimePCT())
+print(len(token.scaleFoPCT()))
+print(len(token.scaleTimePCT()))
 #print("RAW", token.getRawTimeValues())
 #print("TRIMMED", token.getTimeValues())
 table_data = [
