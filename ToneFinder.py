@@ -128,22 +128,14 @@ class ContourFromCsv(DataFromCsv):
     def printMvtDetectionScan(self):
         mvt_dict = self.mvtDetectionScan()
         sorted_mvt_dict = OrderedDict(sorted(mvt_dict.items()))
-
-
-        print(len(mvt_dict))
-
-
-        with open('mydata.csv', 'w') as mycsvfile:
-            thedatawriter = csv.writer(mycsvfile, delimiter=',')
+        print(self.getTokenTag() + " has " + str(len(mvt_dict)) + " turning points.")
+        mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/demo_data.php"
+        with open(mydata, 'w') as myphpfile:
             for attribute, value in sorted_mvt_dict.items():
-                row = attribute, value
-                thedatawriter.writerow(row)
-
-
-
-
+                row = "L " + str(attribute) + " " + str(round(320 - value,1)) + "\n"
+                myphpfile.write(row)
         for attribute, value in sorted_mvt_dict.items():
-            print('{}, {}'.format(attribute, value))
+            print('L {} {}'.format(attribute, round(320 - value,0)))
 
 
 
