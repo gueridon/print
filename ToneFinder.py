@@ -15,73 +15,24 @@ class ContourFromCsv(DataFromCsv):
 
     number_of_frames = 2.0
 
-    def getRawTimeValues(self):
+################################################################################
+##
+#   methods to acquire data from files
+#
+    def getRawTimeValues(self): # Get sample's time values (from data file) #
         return self.csvToLists()[0]
 
-    def getTimeValues(self):
-        time_list = self.getRawTimeValues()
-        in_range_list = self.trimSampleIndex()
-        return [x for x in time_list if time_list.index(x) in in_range_list ]
-
-    def getRawFoValues(self):
+    def getRawFoValues(self): # Get sample's fo values (from data file) #
         return self.csvToLists()[1]
 
-    def getFoValues(self):
-        fo_list = self.getRawFoValues()
-        in_range_list = self.trimSampleIndex()
-        return [x for x in fo_list if fo_list.index(x) in in_range_list ]
-
-    def getFoStats(self):
-        mean_fo = sum(self.getFoValues()) / float(len(self.getFoValues()))
-        max_fo = max(self.getFoValues())
-        min_fo = min(self.getFoValues())
-        return mean_fo, max_fo, min_fo
-
-    def getTimeStats(self):
-        max_time = max(self.getTimeValues())
-        min_time = min(self.getTimeValues())
-        return max_time, min_time
-
-    def overallDurations(self):
-        sample_duration =  max(self.getTimeValues()) - min(self.getTimeValues())
-
-        leftmost_boundary = self.getStartTime()
-        rightmost_boundary = self.getFrameBoundaries(self.number_of_frames)[-1]
-        token_duration = rightmost_boundary - leftmost_boundary
-
-        duration_error = False
-        if token_duration > sample_duration:
-            duration_error = True
-
-        return sample_duration, token_duration, duration_error
-
-    def getLongestSyllable(self):
-        syllables = self.retrieveSpans()
-        #longest_syllable = [(key,value) for key,value in syllables.items() if value == max(syllables.values())]
-        #return float(longest_syllable[0][1])
-        longest_syllable_duration = max(syllables)
-        longest_syllable_position = syllables.index(longest_syllable_duration)
-        return float(longest_syllable_duration), int(longest_syllable_position)
-
-    def getLeftmostBoundary(self):
+    def getLeftmostBoundary(self): # Get token's start time value (from data file) #
         return self.getStartTime()
 
-    def getFrameBoundaries(self, number_of_frame_per_syllable):
-        """ Start time of the sample is used as initial value to which frame
-            lengths are added consecutively """
-        frameboundary = self.getLeftmostBoundary()
-        spans = self.retrieveSpans()
-        frames = [(float(x))/float(number_of_frame_per_syllable)  for x in spans]
-        #print("frame values: ",frames)
-        frame_list = []
-        for x in frames:
-            frameboundary = frameboundary + x
-            frame_list.append(float(frameboundary))
-            frameboundary = frameboundary + x
-            frame_list.append(float(frameboundary))
-        return frame_list
-
-    def trimSampleIndex(self):
+################################################################################
+##
+#   data cleaning
+#
+    def trimSampleIndex(self): # Returns the index token's value only #
         time = self.getRawTimeValues()
         boundaries = self.getFrameBoundaries(2)
         origin_sample = boundaries[0]
@@ -94,13 +45,82 @@ class ContourFromCsv(DataFromCsv):
                 trimmed_index_list.append(index_item)
         return trimmed_index_list
 
-######################################################################
+    def getTimeValues(self): # Excludes time values not in the token #
+        time_list = self.getRawTimeValues()
+        in_range_list = self.trimSampleIndex()
+        return [x for x in time_list if time_list.index(x) in in_range_list ]
+
+    def getFoValues(self): # Excludes fo values not in the token #
+        fo_list = self.getRawFoValues()
+        in_range_list = self.trimSampleIndex()
+        return [x for x in fo_list if fo_list.index(x) in in_range_list ]
+
+################################################################################
+##
+#   descriptive statistics
+#
+    def getFoStats(self): # Computes token's statistics on fo: mean, max, min #
+        mean_fo = sum(self.getFoValues()) / float(len(self.getFoValues()))
+        max_fo = max(self.getFoValues())
+        min_fo = min(self.getFoValues())
+        return mean_fo, max_fo, min_fo
+
+    def getTimeStats(self): # Computes token's statistics on time: max, min #
+        max_time = max(self.getTimeValues())
+        min_time = min(self.getTimeValues())
+        return max_time, min_time
+
+    def overallDurations(self): # Computes sample's duration & token's duration
+                                # Compares both and reports an error if token's
+                                # duration is longer than sample's duration #
+        sample_duration =  max(self.getTimeValues()) - min(self.getTimeValues())
+
+        leftmost_boundary = self.getStartTime()
+        rightmost_boundary = self.getFrameBoundaries(self.number_of_frames)[-1]
+        token_duration = rightmost_boundary - leftmost_boundary
+
+        duration_error = False
+        if token_duration > sample_duration:
+            duration_error = True
+
+        return sample_duration, token_duration, duration_error
+
+################################################################################
+##
+#   syllables & frames
+#
+    def getLongestSyllable(self):   # Returns the longest syllable's duration
+                                    # and its position in the token
+        syllables = self.retrieveSpans()
+        #longest_syllable = [(key,value) for key,value in syllables.items() if value == max(syllables.values())]
+        #return float(longest_syllable[0][1])
+        longest_syllable_duration = max(syllables)
+        longest_syllable_position = syllables.index(longest_syllable_duration)
+        return float(longest_syllable_duration), int(longest_syllable_position)
+
+    def getFrameBoundaries(self, number_of_frame_per_syllable):
+        # Return the list of all syllable boundaries. Start time of the sample
+        # is used as initial value to which frame lengths are added consecutively #
+        frameboundary = self.getLeftmostBoundary()
+        spans = self.retrieveSpans()
+        frames = [(float(x))/float(number_of_frame_per_syllable)  for x in spans]
+        #print("frame values: ",frames)
+        frame_list = []
+        for x in frames:
+            frameboundary = frameboundary + x
+            frame_list.append(float(frameboundary))
+            frameboundary = frameboundary + x
+            frame_list.append(float(frameboundary))
+        return frame_list
+
+################################################################################
 ##
 #   fo scaling methods:
 #   percentage (PCT)
 #   Equivalent Rectangular Bandwith (ERB)
 #
-    def scaleFoPCT(self):
+    def scaleFoPCT(self):   # Returns fo values scaled to percentages,
+                            # relatively to minimum and maximum values
         min_fo = self.getFoStats()[2] # Baseline is set to n points under actual value
         max_fo = self.getFoStats()[1]
         range_fo = max_fo - min_fo
@@ -110,20 +130,27 @@ class ContourFromCsv(DataFromCsv):
     def scaleFoERB(self):
         fo_list_scaled = [round((21.4 * math.log10((0.00437 * item) +1))*10,0) for item in self.getFoValues()]
         return fo_list_scaled
-######################################################################
+################################################################################
 ##
 #   time scaling methods:
 #   percentage (PCT)
 #   pretones - isometric grid
 #
-    def scaleTimePCT(self):
-        min_time = self.getTimeStats()[1] # Baseline is set to n points under actual value
-        max_time = self.getTimeStats()[0]
+    def scaleTimePCT(self): # Returns time values scalded to percentages,
+                            # relatively to minimum and maximum values #
+        min_time = self.getFrameBoundaries(self.number_of_frames)[0]
+        max_time = self.getFrameBoundaries(self.number_of_frames)[-1]
         range_time = max_time - min_time
         time_list_scaled = [round((item - min_time) * (100.0/range_time),0) for item in self.getTimeValues()]
         return time_list_scaled
 
     def scaleTimeIsometric(self):
+        min_time = self.getFrameBoundaries(self.number_of_frames)[0]
+        max_time = self.getFrameBoundaries(self.number_of_frames)[-1]
+        range_time = max_time - min_time
+        syllabic_boundaries = self.getFrameBoundaries(self.number_of_frames)
+        syllabic_boundaries_scaled = [round((item - min_time) * (100.0/range_time),0) for item in syllabic_boundaries]
+        return syllabic_boundaries, syllabic_boundaries_scaled
 
 
 
@@ -134,9 +161,9 @@ class ContourFromCsv(DataFromCsv):
 
 
 
-######################################################################
+################################################################################
 ##
-#   general movement detection tool
+#   movement detection tools
 #
     def mvtDetectionScan(self):
         fo_list = self.scaleFoPCT()
@@ -194,7 +221,7 @@ class ContourFromCsv(DataFromCsv):
                     row = "M " + str(attribute) + " " + str(round(200 - value,1)) + "\n"
                 myphpfile.write(row)
         for attribute, value in sorted_mvt_dict.items():
-            print('L {} {}'.format(attribute, round(320 - value,0)))
+            print('[{}, {}],'.format(attribute, round(320 - value,0)))
 
 
 
@@ -204,8 +231,8 @@ class ContourFromCsv(DataFromCsv):
 
 
 
-""" TESTING """
-token = ContourFromCsv("./EM/foCsv/EM32.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+# TESTING #
+token = ContourFromCsv("./EM/foCsv/EM101.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
 print(token.scaleFoPCT())
@@ -229,6 +256,6 @@ print(table.table)
 print("frame list: ", token.getFrameBoundaries(2.0))
 print(token.retrieveSpans())
 print(token.mvtDetectionScan())
-
+print(token.scaleTimeIsometric(), "hello")
 
 token.printMvtDetectionScan()
