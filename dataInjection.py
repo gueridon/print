@@ -1,6 +1,6 @@
 import  sys, os, csv, pylab, math
 
-class DataFromCsv:
+class DataFromCsv(object):
 
     def __init__(self,fo_time_csv, syllable_csv, tokens_origin_csv):
         self.fo_time = fo_time_csv

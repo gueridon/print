@@ -13,7 +13,8 @@ class ContourFromCsv(DataFromCsv):
         self.spans = syllable_data
         self.origins = origin_data
 
-    number_of_frames = 2.0
+    frames_per_syllable = 2.0
+
 
 ################################################################################
 ##
@@ -34,10 +35,9 @@ class ContourFromCsv(DataFromCsv):
 #
     def trimSampleIndex(self): # Returns the index token's value only #
         time = self.getRawTimeValues()
-        boundaries = self.getFrameBoundaries(2)
+        boundaries = self.getFrameBoundaries(self.frames_per_syllable)
         origin_sample = boundaries[0]
         end_sample = boundaries[-1]
-        #print(origin_sample, end_sample)
         trimmed_index_list = []
         for item in time:
             if item >= origin_sample and item <= end_sample:
@@ -76,7 +76,7 @@ class ContourFromCsv(DataFromCsv):
         sample_duration =  max(self.getTimeValues()) - min(self.getTimeValues())
 
         leftmost_boundary = self.getStartTime()
-        rightmost_boundary = self.getFrameBoundaries(self.number_of_frames)[-1]
+        rightmost_boundary = self.getFrameBoundaries(self.frames_per_syllable)[-1]
         token_duration = rightmost_boundary - leftmost_boundary
 
         duration_error = False
@@ -98,20 +98,32 @@ class ContourFromCsv(DataFromCsv):
         longest_syllable_position = syllables.index(longest_syllable_duration)
         return float(longest_syllable_duration), int(longest_syllable_position)
 
-    def getFrameBoundaries(self, number_of_frame_per_syllable):
-        # Return the list of all syllable boundaries. Start time of the sample
-        # is used as initial value to which frame lengths are added consecutively #
+    def getFrameBoundaries(self, nbr_of_frames_per_syllable):
+                                   # Return the list of all syllable boundaries.
+                                   # Start time of the sample is used as initial
+                                   # value to which frame lengths are added consecutively
         frameboundary = self.getLeftmostBoundary()
         spans = self.retrieveSpans()
-        frames = [(float(x))/float(number_of_frame_per_syllable)  for x in spans]
+        frames = [(float(x))/float(nbr_of_frames_per_syllable)  for x in spans]
         #print("frame values: ",frames)
-        frame_list = []
+        frame_list = [frameboundary]
+        #counter = 1
+        #print(counter,frameboundary)
         for x in frames:
             frameboundary = frameboundary + x
             frame_list.append(float(frameboundary))
+            #counter += 1
+            #print(counter,frameboundary)
             frameboundary = frameboundary + x
             frame_list.append(float(frameboundary))
+            #counter += 1
+            #print(counter,frameboundary)
         return frame_list
+
+    def getTotalFrameNumber(self):  # returns overall number of frames
+                                    # in the token
+        return float(len(self.retrieveSpans())) * self.frames_per_syllable
+
 
 ################################################################################
 ##
@@ -121,7 +133,7 @@ class ContourFromCsv(DataFromCsv):
 #
     def scaleFoPCT(self):   # Returns fo values scaled to percentages,
                             # relatively to minimum and maximum values
-        min_fo = self.getFoStats()[2] # Baseline is set to n points under actual value
+        min_fo = self.getFoStats()[2] # Baseline can be set to n points under actual value
         max_fo = self.getFoStats()[1]
         range_fo = max_fo - min_fo
         fo_list_scaled = [round((item - min_fo) * (100.0/range_fo),0) for item in self.getFoValues()]
@@ -130,6 +142,7 @@ class ContourFromCsv(DataFromCsv):
     def scaleFoERB(self):
         fo_list_scaled = [round((21.4 * math.log10((0.00437 * item) +1))*10,0) for item in self.getFoValues()]
         return fo_list_scaled
+
 ################################################################################
 ##
 #   time scaling methods:
@@ -138,27 +151,39 @@ class ContourFromCsv(DataFromCsv):
 #
     def scaleTimePCT(self): # Returns time values scalded to percentages,
                             # relatively to minimum and maximum values #
-        min_time = self.getFrameBoundaries(self.number_of_frames)[0]
-        max_time = self.getFrameBoundaries(self.number_of_frames)[-1]
+        min_time = self.getFrameBoundaries(self.frames_per_syllable)[0]
+        max_time = self.getFrameBoundaries(self.frames_per_syllable)[-1]
         range_time = max_time - min_time
         time_list_scaled = [round((item - min_time) * (100.0/range_time),0) for item in self.getTimeValues()]
         return time_list_scaled
 
     def scaleTimeIsometric(self):
-        min_time = self.getFrameBoundaries(self.number_of_frames)[0]
-        max_time = self.getFrameBoundaries(self.number_of_frames)[-1]
+        min_time = self.getFrameBoundaries(self.frames_per_syllable)[0]
+        max_time = self.getFrameBoundaries(self.frames_per_syllable)[-1]
         range_time = max_time - min_time
-        syllabic_boundaries = self.getFrameBoundaries(self.number_of_frames)
-        syllabic_boundaries_scaled = [round((item - min_time) * (100.0/range_time),0) for item in syllabic_boundaries]
-        return syllabic_boundaries, syllabic_boundaries_scaled
+        frame_boundaries = self.getFrameBoundaries(self.frames_per_syllable)
+        frame_boundaries_scaled = [round((item - min_time) * (100.0/range_time),0) for item in frame_boundaries]
+
+        target_frame_size = 100.0 / self.getTotalFrameNumber()
+        #print("ref:", target_frame_size, len(self.retrieveSpans()), self.frames_per_syllable)
+        adjusted_time = []
+        for x in self.scaleTimePCT():
+            for boundary in frame_boundaries_scaled:
+                if x > boundary and x <= frame_boundaries_scaled[frame_boundaries_scaled.index(boundary) + 1]:
+                    syl_span =   frame_boundaries_scaled[frame_boundaries_scaled.index(boundary) + 1] - frame_boundaries_scaled[frame_boundaries_scaled.index(boundary)]
+                    #print("SPAN", syl_span)
+                    cumul = frame_boundaries_scaled.index(boundary) * target_frame_size
+                    adjusted_x = (((x - boundary) / syl_span) * target_frame_size) + cumul
+                    #print(frame_boundaries_scaled.index(boundary), x, adjusted_x, syl_span, cumul)
+                    adjusted_time.append(adjusted_x)
+        print("LEN ADJUSTED TIME", len(adjusted_time))
+        return adjusted_time
 
 
 
 
 
-
-
-
+        #return frame_boundaries_scaled
 
 
 ################################################################################
@@ -213,15 +238,21 @@ class ContourFromCsv(DataFromCsv):
         mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/demo_data.php"
         row_count = 0
         with open(mydata, 'w') as myphpfile:
+            myphpfile.write("var lineData = [  \n")
             for attribute, value in sorted_mvt_dict.items():
-                row_count +=1
-                if row_count > 1:
-                    row = "L " + str(attribute) + " " + str(round(200 - value,1)) + "\n"
-                else:
-                    row = "M " + str(attribute) + " " + str(round(200 - value,1)) + "\n"
+                row = "{ 'x': " + str(attribute*3.99 + 25) + ", 'y': " + str(209 - value * 2) +  " },\n"
+
+
+                #row_count +=1
+                #if row_count > 1:
+                #    row = "L " + str(attribute*4) + " " + str(round(200 - value,1)) + "\n"
+                #else:
+                #    row = "M " + str(attribute*4) + " " + str(round(200 - value,1)) + "\n"
                 myphpfile.write(row)
-        for attribute, value in sorted_mvt_dict.items():
-            print('[{}, {}],'.format(attribute, round(320 - value,0)))
+            myphpfile.write(" ];")
+            myphpfile.write("\n var title = '" + self.getTokenTag() + "';")
+        #for attribute, value in sorted_mvt_dict.items():
+        #    print('[{}, {}],'.format(attribute, round(320 - value,0)))
 
 
 
@@ -232,7 +263,7 @@ class ContourFromCsv(DataFromCsv):
 
 
 # TESTING #
-token = ContourFromCsv("./EM/foCsv/EM101.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM18.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
 print(token.scaleFoPCT())
@@ -242,6 +273,7 @@ print(len(token.scaleFoPCT()))
 print(len(token.scaleTimePCT()))
 #print("RAW", token.getRawTimeValues())
 #print("TRIMMED", token.getTimeValues())
+print("TRIM",token.trimSampleIndex())
 table_data = [
     [token.getTokenTag(), ''],
     ['fo stats', (round(token.getFoStats()[0],2),round(token.getFoStats()[1],2),round(token.getFoStats()[2],2))],
@@ -249,13 +281,23 @@ table_data = [
     ['start time', round(token.getLeftmostBoundary(),2)],
     ['sample duration', round(token.overallDurations()[0],2)],
     ['token duration', round(token.overallDurations()[1],2)],
-    ['duration error', token.overallDurations()[2]]
+    ['token != sample', token.overallDurations()[2]]
 ]
 table = AsciiTable(table_data)
 print(table.table)
 print("frame list: ", token.getFrameBoundaries(2.0))
 print(token.retrieveSpans())
 print(token.mvtDetectionScan())
-print(token.scaleTimeIsometric(), "hello")
+print(token.scaleTimeIsometric())
+print(token.scaleTimeIsometric())
 
 token.printMvtDetectionScan()
+
+batch_test = False
+if batch_test is True:
+    listing = os.listdir('./EM/foCsv')
+    for fichier in listing:
+        target_file = "./EM/foCsv/" + fichier
+        print(target_file)
+        token = ContourFromCsv(target_file, "./EM/syllabletime.txt", "./EM/starttimes.txt")
+        token.printMvtDetectionScan()
