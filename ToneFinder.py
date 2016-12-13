@@ -176,14 +176,19 @@ class ContourFromCsv(DataFromCsv):
                     adjusted_x = (((x - boundary) / syl_span) * target_frame_size) + cumul
                     #print(frame_boundaries_scaled.index(boundary), x, adjusted_x, syl_span, cumul)
                     adjusted_time.append(adjusted_x)
-        print("LEN ADJUSTED TIME", len(adjusted_time))
+        #print("LEN ADJUSTED TIME", len(adjusted_time))
         return adjusted_time
 
+################################################################################
+##
+#   pretones
+#
+    def getPretones(self):
+        return 1
 
 
 
 
-        #return frame_boundaries_scaled
 
 
 ################################################################################
@@ -240,7 +245,7 @@ class ContourFromCsv(DataFromCsv):
         with open(mydata, 'w') as myphpfile:
             myphpfile.write("var lineData = [  \n")
             for attribute, value in sorted_mvt_dict.items():
-                row = "{ 'x': " + str(attribute*3.99 + 25) + ", 'y': " + str(209 - value * 2) +  " },\n"
+                row = "{ 'x': " + str(attribute*3.99 + 32) + ", 'y': " + str(217 - value * 1.8) +  " },\n"
 
 
                 #row_count +=1
@@ -263,7 +268,7 @@ class ContourFromCsv(DataFromCsv):
 
 
 # TESTING #
-token = ContourFromCsv("./EM/foCsv/EM18.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM51.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
 print(token.scaleFoPCT())
