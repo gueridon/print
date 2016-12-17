@@ -133,40 +133,47 @@ class ContourFromCsv(DataFromCsv):
 #
     def scaleFoPCT(self):   # Returns fo values scaled to percentages,
                             # relatively to minimum and maximum values
+        fo = self.getFoValues()
         min_fo = self.getFoStats()[2] # Baseline can be set to n points under actual value
         max_fo = self.getFoStats()[1]
         range_fo = max_fo - min_fo
-        fo_list_scaled = [round((item - min_fo) * (100.0/range_fo),0) for item in self.getFoValues()]
+        fo_list_scaled = [round((item - min_fo) * (100.0/range_fo),0) for item in fo]
         return fo_list_scaled
 
     def scaleFoERB(self):
-        fo_list_scaled = [round((21.4 * math.log10((0.00437 * item) +1))*10,0) for item in self.getFoValues()]
+        fo = self.getFoValues()
+        fo_list_scaled = [round((21.4 * math.log10((0.00437 * item) +1))*10,0) for item in fo]
         return fo_list_scaled
 
 ################################################################################
 ##
 #   time scaling methods:
 #   percentage (PCT)
-#   pretones - isometric grid
+#   isometric grid
 #
+    def getBoundariesPCT(self):
+        boundaries = self.getFrameBoundaries(self.frames_per_syllable)
+        min_time = boundaries[0]
+        max_time = boundaries[-1]
+        range_time = max_time - min_time
+        boundaries_scaled = [(item - min_time) * (100.0/range_time) for item in boundaries]
+        return boundaries_scaled
+
     def scaleTimePCT(self): # Returns time values scalded to percentages,
                             # relatively to minimum and maximum values #
-        min_time = self.getFrameBoundaries(self.frames_per_syllable)[0]
-        max_time = self.getFrameBoundaries(self.frames_per_syllable)[-1]
+        time = self.getTimeValues()
+        boundaries = self.getFrameBoundaries(self.frames_per_syllable)
+        min_time = boundaries[0]
+        max_time = boundaries[-1]
         range_time = max_time - min_time
-        time_list_scaled = [round((item - min_time) * (100.0/range_time),0) for item in self.getTimeValues()]
+        time_list_scaled = [(item - min_time) * (100.0/range_time) for item in time]
         return time_list_scaled
 
     def scaleTimeIsometric(self):
-        min_time = self.getFrameBoundaries(self.frames_per_syllable)[0]
-        max_time = self.getFrameBoundaries(self.frames_per_syllable)[-1]
-        range_time = max_time - min_time
-        frame_boundaries = self.getFrameBoundaries(self.frames_per_syllable)
-        frame_boundaries_scaled = [round((item - min_time) * (100.0/range_time),0) for item in frame_boundaries]
-
+        frame_boundaries_scaled = self.getBoundariesPCT()
         target_frame_size = 100.0 / self.getTotalFrameNumber()
         #print("ref:", target_frame_size, len(self.retrieveSpans()), self.frames_per_syllable)
-        adjusted_time = []
+        isometric_time = []
         for x in self.scaleTimePCT():
             for boundary in frame_boundaries_scaled:
                 if x > boundary and x <= frame_boundaries_scaled[frame_boundaries_scaled.index(boundary) + 1]:
@@ -175,18 +182,62 @@ class ContourFromCsv(DataFromCsv):
                     cumul = frame_boundaries_scaled.index(boundary) * target_frame_size
                     adjusted_x = (((x - boundary) / syl_span) * target_frame_size) + cumul
                     #print(frame_boundaries_scaled.index(boundary), x, adjusted_x, syl_span, cumul)
-                    adjusted_time.append(adjusted_x)
-        #print("LEN ADJUSTED TIME", len(adjusted_time))
-        return adjusted_time
+                    isometric_time.append(adjusted_x)
+        #print("LEN ADJUSTED TIME", len(isometric_time))
+        return isometric_time
 
 ################################################################################
 ##
 #   pretones
 #
     def getPretones(self):
-        return 1
+        fo = self.scaleFoPCT()
+        boundaries = self.getBoundariesPCT()
+        #print("boundaries fo in pretones:", boundaries)
+        isometric_time = self.scaleTimeIsometric()
+        #print("isometric_time fo in pretones:", isometric_time)
+        first_pretone = 0, isometric_time[0], fo[0]
+        pretones = [first_pretone]
+        x = 0
+        for left_boundary in boundaries:
+            if boundaries.index(left_boundary) == len(boundaries) - 1:
+                break
+            else:
+                x += 1
+                right_boundary = boundaries[boundaries.index(left_boundary)+1]
+                print(">>> " ,left_boundary, right_boundary)
+                pre_time_indexed = [(ind, x) for ind, x in enumerate(isometric_time) if x > left_boundary and x <= right_boundary]
+                pre_indexes = [x[0] for x in pre_time_indexed]
+                pre_time = [x[1] for x in pre_time_indexed]
+                pre_fo = []
+                for i in pre_indexes:
+                    pre_fo.append(fo[i])
+                print("$$$ ", len(pre_indexes), len(pre_time), len(pre_fo))
+                group = list(zip(pre_indexes, pre_time, pre_fo))
+                print(x, ":",  group)
+                if not group:
+                    pass
+                else:
+                    max_pre = max(group, key=lambda item:item[2])
+                    min_pre = min(group, key=lambda item:item[2])
+                    #print(max_pre, min_pre)
+                    if max_pre[0] > min_pre[0]:
+                        pretones.append(min_pre)
+                        pretones.append(max_pre)
+                    else:
+                        pretones.append(max_pre)
+                        pretones.append(min_pre)
+                    #print(boundaries.index(left_boundary) + 1," : ", group, min_pre, max_pre)
 
+        last_pretone_index = len(fo) - 1
+        print("fo: ", last_pretone_index, len(fo), len(isometric_time))
+        last_pretone = last_pretone_index, isometric_time[last_pretone_index], fo[last_pretone_index]
+        print("last : ", last_pretone)
+        pretones.append(last_pretone)
+#IF FIRST GROUP check if duplicate with first
+#IF MAX = MIN, differeniate
 
+        return pretones
 
 
 
@@ -199,11 +250,14 @@ class ContourFromCsv(DataFromCsv):
         fo_list = self.scaleFoPCT()
         time_list = self.scaleTimePCT()
         list_length = len(fo_list)
+        print(len(time_list),len(fo_list))
         init = fo_list[0]
         prev_scan = 0
-        fo_mvt_list = [fo_list[0]]
-        index_list = [fo_list.index(fo_list[0])]
+        fo_mvt_list = []
+        index_list = []
+        print("///", fo_mvt_list, index_list)
         for i,  x in enumerate(fo_list):
+            #print(i,x, list_length - 1, fo_list[i-1])
             #this compare each value in the list to the next
             if i < list_length - 1: #all values in the list but the last.
                 if x < fo_list[i+1]:
@@ -224,40 +278,77 @@ class ContourFromCsv(DataFromCsv):
             # this keeps track of the movement and finds raw H and L points.
             if scan_check == prev_scan:
                 continue
-            elif scan_check == 0 and prev_scan == 1:
+            else:# scan_check == 0 and prev_scan == 1:
                 fo_mvt_list.append(x)
                 index_list.append(i)
-            elif scan_check == 1 and prev_scan == 0:
-                fo_mvt_list.append(x)
-                index_list.append(i)
-            prev_scan = scan_check
+            #elif scan_check == 1 and prev_scan == 0:
+            #    fo_mvt_list.append(x)
+            #    index_list.append(i)
+            #prev_scan = scan_check
 
         time_mvt_list = [x for x in time_list if time_list.index(x) in index_list ]
-        mvt_raw = dict(zip(time_mvt_list, fo_mvt_list))
+        print("...", len(index_list),len(fo_mvt_list),len(time_mvt_list),'\n',index_list,'\n', fo_mvt_list,'\n',time_mvt_list)
+        mvt_raw = list(zip(time_mvt_list, fo_mvt_list))
         return mvt_raw, index_list
 
-    def printMvtDetectionScan(self):
-        mvt_dict = self.mvtDetectionScan()[0]
-        sorted_mvt_dict = OrderedDict(sorted(mvt_dict.items()))
-        print(self.getTokenTag() + " has " + str(len(mvt_dict)) + " turning points.")
-        mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/demo_data.php"
-        row_count = 0
+
+    def printMvtDetectionScan(self):    # writes data into php file to be used
+                                        # for front-end visualization
+        name = self.getTokenTag()
+        # RAW SCAN
+        mvt_list = self.mvtDetectionScan()[0]
+        #sorted_mvt_dict = OrderedDict(sorted(mvt_dict.items()))
+        print(self.getTokenTag() + " has " + str(len(mvt_list)) + " turning points.")
+        mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/raw_scan.php"
         with open(mydata, 'w') as myphpfile:
+            #add line data
             myphpfile.write("var lineData = [  \n")
-            for attribute, value in sorted_mvt_dict.items():
-                row = "{ 'x': " + str(attribute*3.99 + 32) + ", 'y': " + str(217 - value * 1.8) +  " },\n"
-
-
-                #row_count +=1
-                #if row_count > 1:
-                #    row = "L " + str(attribute*4) + " " + str(round(200 - value,1)) + "\n"
-                #else:
-                #    row = "M " + str(attribute*4) + " " + str(round(200 - value,1)) + "\n"
+            for pair in mvt_list:
+                row = "{ 'x': " + str(pair[0]*3.99 + 32) + ", 'y': " + str(217 - pair[1] * 1.8) +  " },\n"
                 myphpfile.write(row)
             myphpfile.write(" ];")
-            myphpfile.write("\n var title = '" + self.getTokenTag() + "';")
+            #add boundary data
+            boundaries = self.getBoundariesPCT()
+            myphpfile.write("var boundaryData = [  \n")
+            for position in boundaries:
+                row = "{ 'xa': " + str(position*3.99 + 32) + ", 'ya': " + "35" + ", 'xb': " + str(position*3.99 + 32) + ", 'yb' : " + "217" + " },\n"
+                myphpfile.write(row)
+            myphpfile.write(" ];")
+            #add title variable
+            myphpfile.write("\n var title = '" + name + "';")
+        myphpfile.close()
         #for attribute, value in sorted_mvt_dict.items():
         #    print('[{}, {}],'.format(attribute, round(320 - value,0)))
+
+        # PRETONES
+        mydata_b = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/pretones.php"
+        pretones_data = self.getPretones()
+        with open(mydata_b, 'w') as myphpfile_b:
+            #add line data
+            myphpfile_b.write("var lineData = [  \n")
+            for pretone in pretones_data:
+                row = "{ 'x': " + str(pretone[1]*3.99 + 32) + ", 'y': " + str(217 - pretone[2]  * 1.8) +  " },\n"
+                myphpfile_b.write(row)
+            myphpfile_b.write(" ];")
+            #add boundary data
+            boundary_numbers = int(self.getTotalFrameNumber() + 1)
+            target_frame_size = 100.0 / self.getTotalFrameNumber()
+            i = 1
+            boundaries = [0.0]
+            while i in range(boundary_numbers):
+                boundaries.append(i * float(target_frame_size))
+                i += 1
+            myphpfile_b.write("var boundaryData = [  \n")
+            for position in boundaries:
+                row = "{ 'xa': " + str(position*3.99 + 32) + ", 'ya': " + "35" + ", 'xb': " + str(position*3.99 + 32) + ", 'yb' : " + "217" + " },\n"
+                myphpfile_b.write(row)
+            myphpfile_b.write(" ];")
+            #add title variable
+            myphpfile_b.write("\n var title = '" + name + "';")
+        myphpfile_b.close()
+
+
+
 
 
 
@@ -268,12 +359,12 @@ class ContourFromCsv(DataFromCsv):
 
 
 # TESTING #
-token = ContourFromCsv("./EM/foCsv/EM51.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM99.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
-print(token.scaleFoPCT())
+print("fo pct : ", token.scaleFoPCT())
 #print(token.scaleFoERB())
-print(token.scaleTimePCT())
+print("time pct : ", token.scaleTimePCT())
 print(len(token.scaleFoPCT()))
 print(len(token.scaleTimePCT()))
 #print("RAW", token.getRawTimeValues())
@@ -291,11 +382,10 @@ table_data = [
 table = AsciiTable(table_data)
 print(table.table)
 print("frame list: ", token.getFrameBoundaries(2.0))
-print(token.retrieveSpans())
-print(token.mvtDetectionScan())
-print(token.scaleTimeIsometric())
-print(token.scaleTimeIsometric())
-
+#print(token.retrieveSpans())
+#print("mvtdetec : ",token.mvtDetectionScan())
+#print(token.scaleTimeIsometric())
+print(token.getPretones())
 token.printMvtDetectionScan()
 
 batch_test = False
