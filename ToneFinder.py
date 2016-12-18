@@ -4,6 +4,12 @@ from dataInjection import DataFromCsv
 from terminaltables import AsciiTable
 from collections import OrderedDict
 
+from sys import argv
+
+script, name = argv
+
+
+
 class ContourFromCsv(DataFromCsv):
 
     def __init__(self,contour_data, syllable_data, origin_data): #,syllablecsv):
@@ -193,51 +199,65 @@ class ContourFromCsv(DataFromCsv):
     def getPretones(self):
         fo = self.scaleFoPCT()
         boundaries = self.getBoundariesPCT()
-        #print("boundaries fo in pretones:", boundaries)
         isometric_time = self.scaleTimeIsometric()
-        #print("isometric_time fo in pretones:", isometric_time)
-        first_pretone = 0, isometric_time[0], fo[0]
-        pretones = [first_pretone]
         x = 0
+        first_pretone = x, 0, isometric_time[0], fo[0]
+        pretones = [first_pretone]
         for left_boundary in boundaries:
             if boundaries.index(left_boundary) == len(boundaries) - 1:
                 break
             else:
                 x += 1
                 right_boundary = boundaries[boundaries.index(left_boundary)+1]
-                print(">>> " ,left_boundary, right_boundary)
                 pre_time_indexed = [(ind, x) for ind, x in enumerate(isometric_time) if x > left_boundary and x <= right_boundary]
                 pre_indexes = [x[0] for x in pre_time_indexed]
                 pre_time = [x[1] for x in pre_time_indexed]
                 pre_fo = []
                 for i in pre_indexes:
                     pre_fo.append(fo[i])
-                print("$$$ ", len(pre_indexes), len(pre_time), len(pre_fo))
                 group = list(zip(pre_indexes, pre_time, pre_fo))
-                print(x, ":",  group)
                 if not group:
                     pass
                 else:
                     max_pre = max(group, key=lambda item:item[2])
                     min_pre = min(group, key=lambda item:item[2])
-                    #print(max_pre, min_pre)
-                    if max_pre[0] > min_pre[0]:
+                    # recompose tuples
+                    max_pre = x, max_pre[0], max_pre[1], max_pre[2]
+                    min_pre = x, min_pre[0], min_pre[1], min_pre[2]
+                    if max_pre[1] > min_pre[1]:
                         pretones.append(min_pre)
                         pretones.append(max_pre)
                     else:
                         pretones.append(max_pre)
                         pretones.append(min_pre)
-                    #print(boundaries.index(left_boundary) + 1," : ", group, min_pre, max_pre)
-
+        x += 1
         last_pretone_index = len(fo) - 1
-        print("fo: ", last_pretone_index, len(fo), len(isometric_time))
-        last_pretone = last_pretone_index, isometric_time[last_pretone_index], fo[last_pretone_index]
-        print("last : ", last_pretone)
+        last_pretone = x , last_pretone_index, isometric_time[last_pretone_index], fo[last_pretone_index]
         pretones.append(last_pretone)
-#IF FIRST GROUP check if duplicate with first
-#IF MAX = MIN, differeniate
-
         return pretones
+        #IF FIRST GROUP check if duplicate with first
+        #IF MAX = MIN, differentiate
+
+################################################################################
+##
+#   tones
+#
+    def getTones(self):
+        pretones = self.getPretones()
+        TL = pretones[0]
+        TR = pretones[-1]
+        pretones = pretones[1:-1]
+        first_pre_max = max(pretones, key=lambda item:item[3])
+        second_pre_max = max(pretones, key=lambda item:item[3])
+        if first_pre_max[3] >= second_pre_max[3]:
+            H = first_pre_max
+        else:
+            H = second_pre_max
+        print("H : ", H)
+        for x in pretones:
+            print(x[0], x[1], x[2], x[3])
+
+
 
 
 
@@ -250,12 +270,12 @@ class ContourFromCsv(DataFromCsv):
         fo_list = self.scaleFoPCT()
         time_list = self.scaleTimePCT()
         list_length = len(fo_list)
-        print(len(time_list),len(fo_list))
+        #print(len(time_list),len(fo_list))
         init = fo_list[0]
         prev_scan = 0
         fo_mvt_list = []
         index_list = []
-        print("///", fo_mvt_list, index_list)
+        #print("///", fo_mvt_list, index_list)
         for i,  x in enumerate(fo_list):
             #print(i,x, list_length - 1, fo_list[i-1])
             #this compare each value in the list to the next
@@ -281,13 +301,9 @@ class ContourFromCsv(DataFromCsv):
             else:# scan_check == 0 and prev_scan == 1:
                 fo_mvt_list.append(x)
                 index_list.append(i)
-            #elif scan_check == 1 and prev_scan == 0:
-            #    fo_mvt_list.append(x)
-            #    index_list.append(i)
-            #prev_scan = scan_check
 
         time_mvt_list = [x for x in time_list if time_list.index(x) in index_list ]
-        print("...", len(index_list),len(fo_mvt_list),len(time_mvt_list),'\n',index_list,'\n', fo_mvt_list,'\n',time_mvt_list)
+        #print("...", len(index_list),len(fo_mvt_list),len(time_mvt_list),'\n',index_list,'\n', fo_mvt_list,'\n',time_mvt_list)
         mvt_raw = list(zip(time_mvt_list, fo_mvt_list))
         return mvt_raw, index_list
 
@@ -297,8 +313,7 @@ class ContourFromCsv(DataFromCsv):
         name = self.getTokenTag()
         # RAW SCAN
         mvt_list = self.mvtDetectionScan()[0]
-        #sorted_mvt_dict = OrderedDict(sorted(mvt_dict.items()))
-        print(self.getTokenTag() + " has " + str(len(mvt_list)) + " turning points.")
+        #print(self.getTokenTag() + " has " + str(len(mvt_list)) + " turning points.")
         mydata = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/raw_scan.php"
         with open(mydata, 'w') as myphpfile:
             #add line data
@@ -316,6 +331,13 @@ class ContourFromCsv(DataFromCsv):
             myphpfile.write(" ];")
             #add title variable
             myphpfile.write("\n var title = '" + name + "';")
+            #add fo stats variables
+            stats = self.getFoStats()
+            myphpfile.write("\n var fo_mean = '" + str(int(stats[0])) + "';")
+            myphpfile.write("\n var fo_max = '" + str(int(stats[1])) + "';")
+            myphpfile.write("\n var fo_min = '" + str(int(stats[2])) + "';")
+
+
         myphpfile.close()
         #for attribute, value in sorted_mvt_dict.items():
         #    print('[{}, {}],'.format(attribute, round(320 - value,0)))
@@ -327,8 +349,10 @@ class ContourFromCsv(DataFromCsv):
             #add line data
             myphpfile_b.write("var lineData = [  \n")
             for pretone in pretones_data:
-                row = "{ 'x': " + str(pretone[1]*3.99 + 32) + ", 'y': " + str(217 - pretone[2]  * 1.8) +  " },\n"
+                row = "{ 'x': " + str(pretone[2]*3.99 + 32) + ", 'y': " + str(217 - pretone[3]  * 1.8) +  " },\n"
                 myphpfile_b.write(row)
+
+
             myphpfile_b.write(" ];")
             #add boundary data
             boundary_numbers = int(self.getTotalFrameNumber() + 1)
@@ -359,17 +383,17 @@ class ContourFromCsv(DataFromCsv):
 
 
 # TESTING #
-token = ContourFromCsv("./EM/foCsv/EM99.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM" + name + ".csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
-print("fo pct : ", token.scaleFoPCT())
+#print("fo pct : ", token.scaleFoPCT())
 #print(token.scaleFoERB())
-print("time pct : ", token.scaleTimePCT())
-print(len(token.scaleFoPCT()))
-print(len(token.scaleTimePCT()))
+#print("time pct : ", token.scaleTimePCT())
+#print(len(token.scaleFoPCT()))
+#print(len(token.scaleTimePCT()))
 #print("RAW", token.getRawTimeValues())
 #print("TRIMMED", token.getTimeValues())
-print("TRIM",token.trimSampleIndex())
+#print("TRIM",token.trimSampleIndex())
 table_data = [
     [token.getTokenTag(), ''],
     ['fo stats', (round(token.getFoStats()[0],2),round(token.getFoStats()[1],2),round(token.getFoStats()[2],2))],
@@ -381,18 +405,24 @@ table_data = [
 ]
 table = AsciiTable(table_data)
 print(table.table)
-print("frame list: ", token.getFrameBoundaries(2.0))
+#print("frame list: ", token.getFrameBoundaries(2.0))
 #print(token.retrieveSpans())
 #print("mvtdetec : ",token.mvtDetectionScan())
 #print(token.scaleTimeIsometric())
-print(token.getPretones())
+#for x in token.getPretones():
+#    print(x)
+print(len(token.getPretones()))
+token.getTones()
 token.printMvtDetectionScan()
 
 batch_test = False
+pretone_len = []
 if batch_test is True:
     listing = os.listdir('./EM/foCsv')
     for fichier in listing:
         target_file = "./EM/foCsv/" + fichier
-        print(target_file)
+        #print(target_file)
         token = ContourFromCsv(target_file, "./EM/syllabletime.txt", "./EM/starttimes.txt")
-        token.printMvtDetectionScan()
+        pretone_len.append(len(token.getPretones()))
+        #token.printMvtDetectionScan()
+    print(pretone_len)
