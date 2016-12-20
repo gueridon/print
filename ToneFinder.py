@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 from sys import argv
 
-script, name = argv
+script, batch, name = argv
 
 
 
@@ -242,20 +242,141 @@ class ContourFromCsv(DataFromCsv):
 ##
 #   tones
 #
+
+    def getLHL(self, P):
+        #print(pretones)
+        #print("updated pretones : ", len(pretones))
+        #tones = []
+        # get H (highest tone)
+        H = max(P, key=lambda item:item[3])
+        #print("H : ", H)
+        # get L- (lowest pretone leading to H)
+        lead_fo = H[3]
+        Hi = P.index(H)
+        i = Hi
+        #print("Hi, i : ", Hi, i)
+        while i >= -1:
+            #print("@ i : ", i)
+            if i < 0:
+                lead_tone = P[0]
+            elif i == Hi:
+                lead_tone = H
+                #print("yes")
+            elif P[i][3] < lead_fo:
+                lead_fo = P[i][3]
+                lead_tone = P[i]
+            else:
+                break
+            i -= 1
+        #print("L- : ", lead_tone)
+
+        # get -L (lowest pretone after H)
+        trail_fo = H[3]
+        Hi = P.index(H)
+        i = Hi
+        #print("Hi, i : ", Hi, i)
+        while i <= len(P):
+            #print("@ i : ", i)
+            if i > len(P) -1:
+                trail_tone = P[-1]
+            elif i == Hi:
+                trail_tone = H
+                #print("yes")
+            elif P[i][3] < trail_fo:
+                trail_fo = P[i][3]
+                trail_tone = P[i]
+            else:
+                break
+            i += 1
+
+        #print("L- : ", lead_tone)
+        #print("H : ", H)
+        #print("-L : ", trail_tone)
+        LHL = lead_tone, H, trail_tone
+        #tones.append(LHL)
+
+        #before = P[:P.index(lead_tone)-1]
+        #after = P[P.index(trail_tone)+1:]
+
+
+        return(LHL)
+
+
+    def recursiveTones(self, P):
+        if len(P) <= 3 and len(P) > 0:
+            LHL = self.getLHL(P)
+        if len(P) == 0:
+            print("the end")
+
+        else:
+            LHL = self.getLHL(P)
+            lead_tone = LHL[0]
+            trail_tone = LHL[2]
+            # recompose pretone list without main trail_tone
+            if P.index(lead_tone) - 1 < 0:
+                i = 0
+            else:
+                i = P.index(lead_tone) - 1
+            before = P[:i]
+            after = P[P.index(trail_tone) + 1:]
+            #print("before : ", i, before)
+            #print("after : ", P.index(trail_tone) + 1, after)
+            if not after:
+                parts = [before]
+            elif not before:
+                parts = [after]
+            elif not before and not after:
+                parts = []
+            else:
+                parts = [before, after]
+            for part in parts:
+                self.recursiveTones(part)
+
+
+
+
+
     def getTones(self):
         pretones = self.getPretones()
+        print("initial pretones : ", len(pretones))
         TL = pretones[0]
         TR = pretones[-1]
+        print("TL : ", TL)
+        print("TR : ", TR)
         pretones = pretones[1:-1]
-        first_pre_max = max(pretones, key=lambda item:item[3])
-        second_pre_max = max(pretones, key=lambda item:item[3])
-        if first_pre_max[3] >= second_pre_max[3]:
-            H = first_pre_max
-        else:
-            H = second_pre_max
-        print("H : ", H)
-        for x in pretones:
-            print(x[0], x[1], x[2], x[3])
+
+        tones = [self.recursiveTones(pretones)]
+
+        return tones
+
+
+
+
+        #max_before = max(before, key=lambda item:item[3])
+        #max_after = max(after, key=lambda item:item[3])
+
+
+
+        #print("new maxes : ", max_before, max_after)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -336,8 +457,6 @@ class ContourFromCsv(DataFromCsv):
             myphpfile.write("\n var fo_mean = '" + str(int(stats[0])) + "';")
             myphpfile.write("\n var fo_max = '" + str(int(stats[1])) + "';")
             myphpfile.write("\n var fo_min = '" + str(int(stats[2])) + "';")
-
-
         myphpfile.close()
         #for attribute, value in sorted_mvt_dict.items():
         #    print('[{}, {}],'.format(attribute, round(320 - value,0)))
@@ -351,8 +470,6 @@ class ContourFromCsv(DataFromCsv):
             for pretone in pretones_data:
                 row = "{ 'x': " + str(pretone[2]*3.99 + 32) + ", 'y': " + str(217 - pretone[3]  * 1.8) +  " },\n"
                 myphpfile_b.write(row)
-
-
             myphpfile_b.write(" ];")
             #add boundary data
             boundary_numbers = int(self.getTotalFrameNumber() + 1)
@@ -370,7 +487,6 @@ class ContourFromCsv(DataFromCsv):
             #add title variable
             myphpfile_b.write("\n var title = '" + name + "';")
         myphpfile_b.close()
-
 
 
 
@@ -411,18 +527,15 @@ print(table.table)
 #print(token.scaleTimeIsometric())
 #for x in token.getPretones():
 #    print(x)
-print(len(token.getPretones()))
+#print(token.getPretones())
 token.getTones()
 token.printMvtDetectionScan()
 
-batch_test = False
-pretone_len = []
-if batch_test is True:
+batch_test = int(batch)
+if batch_test == 1:
     listing = os.listdir('./EM/foCsv')
     for fichier in listing:
         target_file = "./EM/foCsv/" + fichier
-        #print(target_file)
+        print(target_file, "_____________________________________________________________")
         token = ContourFromCsv(target_file, "./EM/syllabletime.txt", "./EM/starttimes.txt")
-        pretone_len.append(len(token.getPretones()))
-        #token.printMvtDetectionScan()
-    print(pretone_len)
+        token.getTones()
