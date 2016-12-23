@@ -3,10 +3,12 @@ import  sys, os, csv, pylab, math
 from dataInjection import DataFromCsv
 from terminaltables import AsciiTable
 from collections import OrderedDict
+from itertools import chain
 
 from sys import argv
 
-script, batch, name = argv
+#global parameters
+script, gp_batch, gp_number_of_frames, gp_number_of_tones, gp_name = argv
 
 
 
@@ -19,7 +21,7 @@ class ContourFromCsv(DataFromCsv):
         self.spans = syllable_data
         self.origins = origin_data
 
-    frames_per_syllable = 2.0
+    frames_per_syllable = float(gp_number_of_frames)
 
 
 ################################################################################
@@ -292,7 +294,7 @@ class ContourFromCsv(DataFromCsv):
         #print("L- : ", lead_tone)
         #print("H : ", H)
         #print("-L : ", trail_tone)
-        LHL = lead_tone, H, trail_tone
+        LHL = [(lead_tone, H, trail_tone)]
         #tones.append(LHL)
 
         #before = P[:P.index(lead_tone)-1]
@@ -303,15 +305,15 @@ class ContourFromCsv(DataFromCsv):
 
 
     def recursiveTones(self, P):
-        if len(P) <= 3 and len(P) > 0:
-            LHL = self.getLHL(P)
+        #if len(P) <= 3 and len(P) > 0:
+        #    LHL = self.getLHL(P)
         if len(P) == 0:
             print("the end")
 
         else:
             LHL = self.getLHL(P)
-            lead_tone = LHL[0]
-            trail_tone = LHL[2]
+            lead_tone = LHL[0][0]
+            trail_tone = LHL[0][2]
             # recompose pretone list without main trail_tone
             if P.index(lead_tone) - 1 < 0:
                 i = 0
@@ -329,25 +331,89 @@ class ContourFromCsv(DataFromCsv):
                 parts = []
             else:
                 parts = [before, after]
-            for part in parts:
-                self.recursiveTones(part)
+            return self.getLHL(P) + [self.recursiveTones(part) for part in parts if part]
 
 
+
+    def flatten(self, L):
+        for item in L:
+            try:
+                yield from self.flatten(item)
+            except TypeError:
+                yield item
+
+    def flattener(self,S): # http://stackoverflow.com/users/307705/mu-mind, http://tinyurl.com/z25rxro
+        if S == []:
+            return S
+        if isinstance(S[0], list):
+            return self.flattener(S[0]) + self.flattener(S[1:])
+        return S[:1] + self.flattener(S[1:])
+
+
+    def nestedTonesExtractor(self,nestedlist):
+        if len(nestedlist) == 1:
+            #print("recurse 1: ", nestedlist[0])
+            return nestedlist[0]
+        else:
+            #print("recurse 2: ", nestedlist[0], self.nestedTonesExtractor(nestedlist[1]))
+            return nestedlist[0] + self.nestedTonesExtractor(nestedlist[1])
 
 
 
     def getTones(self):
         pretones = self.getPretones()
-        print("initial pretones : ", len(pretones))
+        #print("initial pretones : ", len(pretones))
         TL = pretones[0]
         TR = pretones[-1]
-        print("TL : ", TL)
-        print("TR : ", TR)
+        #print("TL : ", TL)
+        #print("TR : ", TR)
         pretones = pretones[1:-1]
 
-        tones = [self.recursiveTones(pretones)]
+        tone_extraction = self.recursiveTones(pretones)
+        #tone_sequence = sorted(self.flattener(tone_extraction),key=lambda x: x[0][1])#, reverse=True)
+        tone_sequence = self.flattener(tone_extraction)
 
-        return tones
+        tone_sequence = self.limitToneNumber(tone_sequence, gp_number_of_tones)
+        print(tone_sequence)
+
+
+
+        tone_points =   [point for tone in tone_sequence for point in tone]
+        tone_points = sorted(list(set(tone_points)),key=lambda x: x[1])#, reverse=True)
+        #print(tone_points)
+        tone_points[0:0] = [TL]
+        tone_points.append(TR)
+        print(tone_points)
+        return tone_points
+
+    def limitToneNumber(self, tone_list, number_of_tones):
+        i = 1
+        ordered_tones = []
+        current_tone_list = tone_list.copy()
+        if number_of_tones == 'max':
+            tone_limit = len(tone_list)
+        else:
+            tone_limit = int(number_of_tones)
+
+
+
+
+        while i <= tone_limit:
+            #print("len tone_list and current:", len(tone_list), len(current_tone_list))
+            list_of_max = []
+            for tone in current_tone_list:
+                max_fo = max(tone, key=lambda item:item[3])
+                loc = (current_tone_list.index(tone), tone.index(max_fo), max_fo)
+                list_of_max.append(loc)
+            #print(list_of_max)
+            global_max_fo = max(list_of_max, key=lambda item:item[2][3])
+            print("H", i, " is : ", current_tone_list[global_max_fo[0]])
+            ordered_tones.append(current_tone_list[global_max_fo[0]])
+
+            current_tone_list.pop(global_max_fo[0])
+            i += 1
+        return ordered_tones
+
 
 
 
@@ -431,7 +497,7 @@ class ContourFromCsv(DataFromCsv):
 
     def printMvtDetectionScan(self):    # writes data into php file to be used
                                         # for front-end visualization
-        name = self.getTokenTag()
+        gp_name = self.getTokenTag()
         # RAW SCAN
         mvt_list = self.mvtDetectionScan()[0]
         #print(self.getTokenTag() + " has " + str(len(mvt_list)) + " turning points.")
@@ -451,7 +517,7 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile.write(row)
             myphpfile.write(" ];")
             #add title variable
-            myphpfile.write("\n var title = '" + name + "';")
+            myphpfile.write("\n var title = '" + gp_name + "';")
             #add fo stats variables
             stats = self.getFoStats()
             myphpfile.write("\n var fo_mean = '" + str(int(stats[0])) + "';")
@@ -485,11 +551,37 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile_b.write(row)
             myphpfile_b.write(" ];")
             #add title variable
-            myphpfile_b.write("\n var title = '" + name + "';")
+            myphpfile_b.write("\n var title = '" + gp_name + "';")
         myphpfile_b.close()
 
+    # TONES
+        mydata_c = "/Applications/XAMPP/xamppfiles/htdocs/oftenback/linguistics/tones.php"
+        tones_data = self.getTones()
+        with open(mydata_c, 'w') as myphpfile_c:
+            #add line data
+            myphpfile_c.write("var lineData = [  \n")
+            for tone in tones_data:
+                row = "{ 'x': " + str(tone[2]*3.99 + 32) + ", 'y': " + str(217 - tone[3]  * 1.8) +  " },\n"
+                myphpfile_c.write(row)
+            myphpfile_c.write(" ];")
+            #add boundary data
+            boundary_numbers = int(self.getTotalFrameNumber() + 1)
+            target_frame_size = 100.0 / self.getTotalFrameNumber()
+            i = 1
+            boundaries = [0.0]
+            while i in range(boundary_numbers):
+                boundaries.append(i * float(target_frame_size))
+                i += 1
+            myphpfile_c.write("var boundaryData = [  \n")
+            for position in boundaries:
+                row = "{ 'xa': " + str(position*3.99 + 32) + ", 'ya': " + "35" + ", 'xb': " + str(position*3.99 + 32) + ", 'yb' : " + "217" + " },\n"
+                myphpfile_c.write(row)
+            myphpfile_c.write(" ];")
+            #add title variable
+            myphpfile_c.write("\n var title = '" + gp_name + "';")
+            myphpfile_c.write("\n var toneNumber = '" + gp_number_of_tones + "';")
 
-
+        myphpfile_c.close()
 
 
 
@@ -499,7 +591,7 @@ class ContourFromCsv(DataFromCsv):
 
 
 # TESTING #
-token = ContourFromCsv("./EM/foCsv/EM" + name + ".csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
+token = ContourFromCsv("./EM/foCsv/EM" + gp_name + ".csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 #print(token.csvToLists())
 #print(token.retrieveSpans())
 #print("fo pct : ", token.scaleFoPCT())
@@ -528,11 +620,11 @@ print(table.table)
 #for x in token.getPretones():
 #    print(x)
 #print(token.getPretones())
-token.getTones()
+#token.getTones()
 token.printMvtDetectionScan()
 
-batch_test = int(batch)
-if batch_test == 1:
+gp_batch_test = int(gp_batch)
+if gp_batch_test == 1:
     listing = os.listdir('./EM/foCsv')
     for fichier in listing:
         target_file = "./EM/foCsv/" + fichier
