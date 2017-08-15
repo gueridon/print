@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC31</id>
+  <time>
+    <fileduration>2.774</fileduration>
+    <sampleduration>0.8897059515228947</sampleduration>
+    <starttime>1.4676342737740231</starttime>
+  </time>
+  <transcription>T'as dé bran ché la té lé</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.10131882721968899</syllableduration>
+      <syllablestart>1.4676342737740231</syllablestart>
+      <syllabletext>T'as</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.10765125392091979</syllableduration>
+      <syllablestart>1.568953100993712</syllablestart>
+      <syllabletext>dé</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1329809607258421</syllableduration>
+      <syllablestart>1.676604354914632</syllablestart>
+      <syllabletext>bran</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.14247960077768762</syllableduration>
+      <syllablestart>1.809585315640474</syllablestart>
+      <syllabletext>ché</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.09182018716784301</syllableduration>
+      <syllablestart>1.9520649164181616</syllablestart>
+      <syllabletext>la</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.09815261386907403</syllableduration>
+      <syllablestart>2.0438851035860046</syllablestart>
+      <syllabletext>té</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.21530250784183913</syllableduration>
+      <syllablestart>2.1420377174550786</syllablestart>
+      <syllabletext>lé</syllabletext>
+    </syl>
+  </syllables>
+</sample>

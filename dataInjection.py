@@ -38,11 +38,17 @@ class DataFromCsv(object):
         return spans_list
 
     def getStartTime(self):
-
         with open(self.origins, mode='rU') as f:
             reader = csv.reader(f,delimiter='\t')
             next(reader)
-            tag_row = [row for row in reader if row[0] == self.getTokenTag()]
+
+            tag_row = []
+            for row in reader:
+                #print("row",row)
+                if row[0] == self.getTokenTag():
+                    tag_row.append(row)
+
+            #tag_row = [row for row in reader if row[0] == self.getTokenTag()]
             return float(tag_row[0][2])
 
 """

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC100</id>
+  <time>
+    <fileduration>4.623</fileduration>
+    <sampleduration>1.034299468549121</sampleduration>
+    <starttime>1.9183606611892372</starttime>
+  </time>
+  <transcription>Vou s en vou lez un peu plus</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.09366742636095382</syllableduration>
+      <syllablestart>1.9183606611892372</syllablestart>
+      <syllabletext>Vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.13720299072590336</syllableduration>
+      <syllablestart>2.012028087550191</syllablestart>
+      <syllabletext>s en</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.10026372399200678</syllableduration>
+      <syllablestart>2.1492310782760944</syllablestart>
+      <syllabletext>vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.11609483830653389</syllableduration>
+      <syllablestart>2.249494802268101</syllablestart>
+      <syllabletext>lez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.09498668588716397</syllableduration>
+      <syllablestart>2.365589640574635</syllablestart>
+      <syllabletext>un</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.139841509778325</syllableduration>
+      <syllablestart>2.460576326461799</syllablestart>
+      <syllabletext>peu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3522422934982341</syllableduration>
+      <syllablestart>2.600417836240124</syllablestart>
+      <syllabletext>plus</syllabletext>
+    </syl>
+  </syllables>
+</sample>

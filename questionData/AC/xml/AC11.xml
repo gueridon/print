@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC11</id>
+  <time>
+    <fileduration>3.005</fileduration>
+    <sampleduration>1.1284977282640305</sampleduration>
+    <starttime>1.178336202165296</starttime>
+  </time>
+  <transcription>T’as gar dé toutes les fac tures</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11319278125444687</syllableduration>
+      <syllablestart>1.178336202165296</syllablestart>
+      <syllabletext>T’as</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.15092370833926227</syllableduration>
+      <syllablestart>1.291528983419743</syllablestart>
+      <syllabletext>gar</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1303432026566358</syllableduration>
+      <syllablestart>1.4424526917590053</syllablestart>
+      <syllabletext>dé</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.20237497254582926</syllableduration>
+      <syllablestart>1.572795894415641</syllablestart>
+      <syllabletext>toutes</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.06174151704788011</syllableduration>
+      <syllablestart>1.7751708669614703</syllablestart>
+      <syllabletext>les</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1920847197045159</syllableduration>
+      <syllablestart>1.8369123840093504</syllablestart>
+      <syllabletext>fac</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.2778368267154603</syllableduration>
+      <syllablestart>2.0289971037138663</syllablestart>
+      <syllabletext>tures</syllabletext>
+    </syl>
+  </syllables>
+</sample>

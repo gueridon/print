@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC75</id>
+  <time>
+    <fileduration>5.856</fileduration>
+    <sampleduration>0.9347149643306616</sampleduration>
+    <starttime>3.3798800171279875</starttime>
+  </time>
+  <transcription>Vou s ha bi tez à Bor deaux</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.08267749070246655</syllableduration>
+      <syllablestart>3.3798800171279875</syllablestart>
+      <syllabletext>Vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.12401623605369982</syllableduration>
+      <syllablestart>3.462557507830454</syllablestart>
+      <syllabletext>s ha</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1492788026572307</syllableduration>
+      <syllablestart>3.586573743884154</syllablestart>
+      <syllabletext>bi</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.1102366542699551</syllableduration>
+      <syllablestart>3.7358525465413845</syllablestart>
+      <syllabletext>tez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>None</syllableduration>
+      <syllablestart>3.8460892008113396</syllablestart>
+      <syllabletext>à</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.2388460842515694</syllableduration>
+      <syllablestart>3.9563258550812948</syllablestart>
+      <syllabletext>Bor</syllabletext>
+    </syl>
+  </syllables>
+</sample>

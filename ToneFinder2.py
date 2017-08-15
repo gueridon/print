@@ -19,3 +19,21 @@ class ContourFromCsv(DataFromCsv):
 
 token = ContourFromCsv("./EM/foCsv/EM1.csv", "./EM/syllabletime.txt", "./EM/starttimes.txt")
 ContourFromCsv.getRawTimeValues(2)
+
+
+
+    def nestedTonesExtractor(self,nestedlist):
+        if len(nestedlist) == 1:
+            #print("recurse 1: ", nestedlist[0])
+            return nestedlist[0]
+        else:
+            #print("recurse 2: ", nestedlist[0], self.nestedTonesExtractor(nestedlist[1]))
+            return nestedlist[0] + self.nestedTonesExtractor(nestedlist[1])
+
+
+    def flatten(self, L):
+        for item in L:
+            try:
+                yield from self.flatten(item)
+            except TypeError:
+                yield item

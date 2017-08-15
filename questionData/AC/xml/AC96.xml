@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC96</id>
+  <time>
+    <fileduration>6.780</fileduration>
+    <sampleduration>1.385197253240794</sampleduration>
+    <starttime>3.9877057547886463</starttime>
+  </time>
+  <transcription>Tu vas res ter chez ta soeur</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.08104877545557843</syllableduration>
+      <syllablestart>3.9877057547886463</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.14244936292192545</syllableduration>
+      <syllablestart>4.068754530244225</syllablestart>
+      <syllabletext>vas</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1694656214071184</syllableduration>
+      <syllablestart>4.21120389316615</syllablestart>
+      <syllabletext>res</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.4003318302805843</syllableduration>
+      <syllablestart>4.380669514573269</syllablestart>
+      <syllabletext>ter</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.18665778589769566</syllableduration>
+      <syllablestart>4.781001344853853</syllablestart>
+      <syllabletext>chez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.11788912793538664</syllableduration>
+      <syllablestart>4.9676591307515485</syllablestart>
+      <syllabletext>ta</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.28735474934250504</syllableduration>
+      <syllablestart>5.085548258686935</syllablestart>
+      <syllabletext>soeur</syllabletext>
+    </syl>
+  </syllables>
+</sample>

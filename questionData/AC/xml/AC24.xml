@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC24</id>
+  <time>
+    <fileduration>2.928</fileduration>
+    <sampleduration>1.072820319991895</sampleduration>
+    <starttime>1.1949073068244622</starttime>
+  </time>
+  <transcription>Vou s a vez mis du cu min</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11028993943841914</syllableduration>
+      <syllablestart>1.1949073068244622</syllablestart>
+      <syllabletext>Vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.13702689445379357</syllableduration>
+      <syllablestart>1.3051972462628814</syllablestart>
+      <syllabletext>s a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.10360570068457542</syllableduration>
+      <syllablestart>1.442224140716675</syllablestart>
+      <syllabletext>vez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.16042173009224592</syllableduration>
+      <syllablestart>1.5458298414012503</syllablestart>
+      <syllabletext>mis</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.1838165657306987</syllableduration>
+      <syllablestart>1.7062515714934963</syllablestart>
+      <syllabletext>du</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.12031629756918472</syllableduration>
+      <syllablestart>1.890068137224195</syllablestart>
+      <syllabletext>cu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.2573431920229776</syllableduration>
+      <syllablestart>2.0103844347933797</syllablestart>
+      <syllabletext>min</syllabletext>
+    </syl>
+  </syllables>
+</sample>

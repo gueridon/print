@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC57</id>
+  <time>
+    <fileduration>5.239</fileduration>
+    <sampleduration>1.10940842864313</sampleduration>
+    <starttime>2.1218097674238603</starttime>
+  </time>
+  <transcription>Vous faites beau coup d’e xer cice</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.06578702272277326</syllableduration>
+      <syllablestart>2.1218097674238603</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.18839011052430488</syllableduration>
+      <syllablestart>2.1875967901466336</syllablestart>
+      <syllabletext>faites</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.11064181094284598</syllableduration>
+      <syllablestart>2.3759869006709384</syllablestart>
+      <syllabletext>beau</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.10167085329883152</syllableduration>
+      <syllablestart>2.4866287116137844</syllablestart>
+      <syllabletext>coup</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.1465256415189038</syllableduration>
+      <syllablestart>2.588299564912616</syllablestart>
+      <syllabletext>d’e</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.14353532230423216</syllableduration>
+      <syllablestart>2.7348252064315197</syllablestart>
+      <syllabletext>xer</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.35285766733123847</syllableduration>
+      <syllablestart>2.878360528735752</syllablestart>
+      <syllabletext>cice</syllabletext>
+    </syl>
+  </syllables>
+</sample>

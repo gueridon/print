@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC71</id>
+  <time>
+    <fileduration>4.931</fileduration>
+    <sampleduration>0.8907370419576055</sampleduration>
+    <starttime>2.5283784368583935</starttime>
+  </time>
+  <transcription>Vou s a vez beau coup d’a mis</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.09283115573751699</syllableduration>
+      <syllablestart>2.5283784368583935</syllablestart>
+      <syllabletext>Vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.07956956206072929</syllableduration>
+      <syllablestart>2.6212095925959105</syllablestart>
+      <syllabletext>s a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.11493381186549723</syllableduration>
+      <syllablestart>2.7007791546566398</syllablestart>
+      <syllabletext>vez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.1370364679934779</syllableduration>
+      <syllablestart>2.815712966522137</syllablestart>
+      <syllabletext>beau</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.12156460870389152</syllableduration>
+      <syllablestart>2.952749434515615</syllablestart>
+      <syllabletext>coup</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1436672648318722</syllableduration>
+      <syllablestart>3.0743140432195064</syllablestart>
+      <syllabletext>d’a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.20113417076462037</syllableduration>
+      <syllablestart>3.2179813080513786</syllablestart>
+      <syllabletext>mis</syllabletext>
+    </syl>
+  </syllables>
+</sample>

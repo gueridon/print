@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC74</id>
+  <time>
+    <fileduration>4.007</fileduration>
+    <sampleduration>0.9780227573724203</sampleduration>
+    <starttime>1.9837416750291268</starttime>
+  </time>
+  <transcription>Nous pou vons pa sser la voir</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.15604408038975692</syllableduration>
+      <syllablestart>1.9837416750291268</syllablestart>
+      <syllabletext>Nous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.07252753032199966</syllableduration>
+      <syllablestart>2.1397857554188837</syllablestart>
+      <syllabletext>pou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.17802211988127192</syllableduration>
+      <syllablestart>2.2123132857408834</syllablestart>
+      <syllabletext>vons</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.08571435401690897</syllableduration>
+      <syllablestart>2.3903354056221553</syllablestart>
+      <syllabletext>pa</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.15824188433890818</syllableduration>
+      <syllablestart>2.4760497596390643</syllablestart>
+      <syllabletext>sser</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.10329678561012079</syllableduration>
+      <syllablestart>2.6342916439779724</syllablestart>
+      <syllabletext>la</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.22417600281345385</syllableduration>
+      <syllablestart>2.7375884295880932</syllablestart>
+      <syllabletext>voir</syllabletext>
+    </syl>
+  </syllables>
+</sample>

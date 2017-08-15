@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC95</id>
+  <time>
+    <fileduration>5.548</fileduration>
+    <sampleduration>1.0007155467667053</sampleduration>
+    <starttime>3.28073107679033</starttime>
+  </time>
+  <transcription>T'as im pri mé ton ra pport</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.10248291743996374</syllableduration>
+      <syllablestart>3.28073107679033</syllablestart>
+      <syllabletext>T'as</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.12860601404230732</syllableduration>
+      <syllablestart>3.3832139942302937</syllablestart>
+      <syllabletext>im</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1245870761034853</syllableduration>
+      <syllablestart>3.511820008272601</syllablestart>
+      <syllabletext>pri</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.14468176579759628</syllableduration>
+      <syllablestart>3.6364070843760863</syllablestart>
+      <syllabletext>mé</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.09645451053173026</syllableduration>
+      <syllablestart>3.7810888501736826</syllablestart>
+      <syllabletext>ton</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.16276698652229582</syllableduration>
+      <syllablestart>3.877543360705413</syllablestart>
+      <syllabletext>ra</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.24113627632932655</syllableduration>
+      <syllablestart>4.040310347227709</syllablestart>
+      <syllabletext>pport</syllabletext>
+    </syl>
+  </syllables>
+</sample>

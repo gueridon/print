@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC12</id>
+  <time>
+    <fileduration>2.928</fileduration>
+    <sampleduration>1.012662171207303</sampleduration>
+    <starttime>1.3018551268859595</starttime>
+  </time>
+  <transcription>Vous vou lez qu’on vienne vous voir</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.10026358130765378</syllableduration>
+      <syllablestart>1.3018551268859595</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.10026358130765378</syllableduration>
+      <syllablestart>1.4021187081936133</syllablestart>
+      <syllabletext>vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.12365841694610635</syllableduration>
+      <syllablestart>1.502382289501267</syllablestart>
+      <syllabletext>lez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.16042173009224614</syllableduration>
+      <syllablestart>1.6260407064473734</syllablestart>
+      <syllabletext>qu’on</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.18715868510762035</syllableduration>
+      <syllablestart>1.7864624365396196</syllablestart>
+      <syllabletext>vienne</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.113632058815341</syllableduration>
+      <syllablestart>1.97362112164724</syllablestart>
+      <syllabletext>vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.22726411763068155</syllableduration>
+      <syllablestart>2.087253180462581</syllablestart>
+      <syllabletext>voir</syllabletext>
+    </syl>
+  </syllables>
+</sample>

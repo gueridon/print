@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC3</id>
+  <time>
+    <fileduration>2.055</fileduration>
+    <sampleduration>1.0905989330381174</sampleduration>
+    <starttime>0.5641323752149933</starttime>
+  </time>
+  <transcription>Tu veux res ter pour la nuit</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.13134094677448294</syllableduration>
+      <syllablestart>0.5641323752149933</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.12665019867539418</syllableduration>
+      <syllablestart>0.6954733219894762</syllablestart>
+      <syllabletext>veux</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.18528454991400267</syllableduration>
+      <syllablestart>0.8221235206648704</syllablestart>
+      <syllabletext>res</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.1454131910717491</syllableduration>
+      <syllablestart>1.007408070578873</syllablestart>
+      <syllabletext>ter</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.1055418322294952</syllableduration>
+      <syllablestart>1.1528212616506222</syllablestart>
+      <syllabletext>pour</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.11726870247721699</syllableduration>
+      <syllablestart>1.2583630938801174</syllablestart>
+      <syllabletext>la</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.2790995118957762</syllableduration>
+      <syllablestart>1.3756317963573343</syllablestart>
+      <syllabletext>nuit</syllabletext>
+    </syl>
+  </syllables>
+</sample>

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC52</id>
+  <time>
+    <fileduration>5.856</fileduration>
+    <sampleduration>1.0026358130765374</sampleduration>
+    <starttime>2.3781171958296983</starttime>
+  </time>
+  <transcription>On peut lui do nner du lait</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.13702689445379335</syllableduration>
+      <syllablestart>2.3781171958296983</syllablestart>
+      <syllabletext>On</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.10360570068457564</syllableduration>
+      <syllablestart>2.5151440902834916</syllablestart>
+      <syllabletext>peut</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.16710596884608941</syllableduration>
+      <syllablestart>2.6187497909680673</syllablestart>
+      <syllabletext>lui</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.09357934255381029</syllableduration>
+      <syllablestart>2.7858557598141567</syllablestart>
+      <syllabletext>do</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.113632058815341</syllableduration>
+      <syllablestart>2.879435102367967</syllablestart>
+      <syllabletext>nner</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1336847750768717</syllableduration>
+      <syllablestart>2.993067161183308</syllablestart>
+      <syllabletext>du</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.254001072646056</syllableduration>
+      <syllablestart>3.1267519362601797</syllablestart>
+      <syllabletext>lait</syllabletext>
+    </syl>
+  </syllables>
+</sample>

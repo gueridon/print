@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC55</id>
+  <time>
+    <fileduration>6.164</fileduration>
+    <sampleduration>0.9498636475238396</sampleduration>
+    <starttime>3.5869293980381407</starttime>
+  </time>
+  <transcription>Vous a vez les do cu ments</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.08443232422434166</syllableduration>
+      <syllablestart>3.5869293980381407</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.11961245931781672</syllableduration>
+      <syllablestart>3.6713617222624824</syllablestart>
+      <syllabletext>a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.12664848633651182</syllableduration>
+      <syllablestart>3.790974181580299</syllablestart>
+      <syllabletext>vez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.08091431071499366</syllableduration>
+      <syllablestart>3.917622667916811</syllablestart>
+      <syllabletext>les</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.13368451335520692</syllableduration>
+      <syllablestart>3.9985369786318046</syllablestart>
+      <syllabletext>do</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.15831060792064022</syllableduration>
+      <syllablestart>4.1322214919870115</syllablestart>
+      <syllabletext>cu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.24626094565432854</syllableduration>
+      <syllablestart>4.290532099907652</syllablestart>
+      <syllabletext>ments</syllabletext>
+    </syl>
+  </syllables>
+</sample>

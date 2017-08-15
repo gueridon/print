@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC20</id>
+  <time>
+    <fileduration>2.389</fileduration>
+    <sampleduration>1.1451232614936306</sampleduration>
+    <starttime>0.7348687034245791</starttime>
+  </time>
+  <transcription>T'es pa ssé par l'au tor oute</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.18812739295966785</syllableduration>
+      <syllablestart>0.7348687034245791</syllablestart>
+      <syllabletext>T'es</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.10905935823748858</syllableduration>
+      <syllablestart>0.922996096384247</syllablestart>
+      <syllabletext>pa</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.17722145713591897</syllableduration>
+      <syllablestart>1.0320554546217355</syllablestart>
+      <syllabletext>ssé</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.11178584219342591</syllableduration>
+      <syllablestart>1.2092769117576545</syllablestart>
+      <syllabletext>par</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.149956617576547</syllableduration>
+      <syllablestart>1.3210627539510804</syllablestart>
+      <syllabletext>l'au</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.10360639032561414</syllableduration>
+      <syllablestart>1.4710193715276274</syllablestart>
+      <syllabletext>tor</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3053662030649682</syllableduration>
+      <syllablestart>1.5746257618532415</syllablestart>
+      <syllabletext>oute</syllabletext>
+    </syl>
+  </syllables>
+</sample>

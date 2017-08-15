@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC93</id>
+  <time>
+    <fileduration>6.472</fileduration>
+    <sampleduration>0.9986734172480327</sampleduration>
+    <starttime>3.6356911344432215</starttime>
+  </time>
+  <transcription>Vou s a vez pu lui mon trer</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.10163490529515373</syllableduration>
+      <syllablestart>3.6356911344432215</syllablestart>
+      <syllabletext>Vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.09942545083221566</syllableduration>
+      <syllablestart>3.737326039738375</syllablestart>
+      <syllabletext>s a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1634996302574212</syllableduration>
+      <syllablestart>3.836751490570591</syllablestart>
+      <syllabletext>vez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.0905876329804629</syllableduration>
+      <syllablestart>4.000251120828012</syllablestart>
+      <syllabletext>pu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.08837817851752483</syllableduration>
+      <syllablestart>4.090838753808475</syllablestart>
+      <syllabletext>lui</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1634996302574221</syllableduration>
+      <syllablestart>4.179216932326</syllablestart>
+      <syllabletext>mon</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.2916479891078323</syllableduration>
+      <syllablestart>4.342716562583422</syllablestart>
+      <syllabletext>trer</syllabletext>
+    </syl>
+  </syllables>
+</sample>

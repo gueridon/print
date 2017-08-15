@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>AC48</id>
+  <time>
+    <fileduration>5.239</fileduration>
+    <sampleduration>0.9150376796894819</sampleduration>
+    <starttime>2.689970418211447</starttime>
+  </time>
+  <transcription>Vous a llez nous en par ler</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.08970957644014543</syllableduration>
+      <syllablestart>2.689970418211447</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.11961276858686043</syllableduration>
+      <syllablestart>2.7796799946515924</syllablestart>
+      <syllabletext>a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.11363213015751716</syllableduration>
+      <syllablestart>2.899292763238453</syllablestart>
+      <syllabletext>llez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.12260308780153206</syllableduration>
+      <syllablestart>3.01292489339597</syllablestart>
+      <syllabletext>nous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.16446755680693315</syllableduration>
+      <syllablestart>3.135527981197502</syllablestart>
+      <syllabletext>en</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.12260308780153162</syllableduration>
+      <syllablestart>3.2999955380044352</syllablestart>
+      <syllabletext>par</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.18240947209496206</syllableduration>
+      <syllablestart>3.422598625805967</syllablestart>
+      <syllabletext>ler</syllabletext>
+    </syl>
+  </syllables>
+</sample>
