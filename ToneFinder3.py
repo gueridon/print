@@ -7,21 +7,25 @@ from itertools import chain
 from operator import itemgetter
 import time
 
+from printModule import *
+import printConfig
+
 from sys import argv
 
 #global parameters
-script, gb_debug, gp_batch, gp_number_of_frames, gp_number_of_tones, gp_name = argv
+#script, printConfig.gb_debug, printConfig.gp_batch, printConfig.gp_number_of_frames, printConfig.gp_number_of_tones, printConfig.gp_name = argv
 
 class ContourFromCsv(DataFromCsv):
 
-    def __init__(self,contour_data, syllable_data, origin_data): #,syllablecsv):
+    def __init__(self,contour_data, syllable_data, origin_data, nof): #,syllablecsv):
         super().__init__(contour_data,syllable_data,origin_data)
 
         self.fo_time = contour_data
         self.spans = syllable_data
         self.origins = origin_data
 
-    frames_per_syllable = float(gp_number_of_frames)
+
+        self.frames_per_syllable = float(nof)
 
 ################################################################################
 ##
@@ -156,10 +160,6 @@ class ContourFromCsv(DataFromCsv):
         fo_list_scaled = [round((2595 * math.log10((0.0014286 * item) +1))/5,0) for item in fo]
         return fo_list_scaled
 
-
-
-
-
 ################################################################################
 ##
 #   time scaling methods:
@@ -206,7 +206,14 @@ class ContourFromCsv(DataFromCsv):
 #   pretones
 #
     def getPretones(self):
-        fo = self.scaleFoPCT()
+        if printConfig.scalingMethod == 'PCT':
+            fo = self.scaleFoPCT()
+        elif printConfig.scalingMethod == 'ERB':
+            fo = self.scaleFoERB()
+        elif printConfig.scalingMethod == 'BRK':
+            fo = self.scaleFoBARK()
+        elif printConfig.scalingMethod == 'MEL':
+            fo = self.scaleFoMEL()
         #print("len fo", len(fo))
         boundaries = self.getBoundariesPCT()
         isometric_time = self.scaleTimeIsometric()
@@ -335,7 +342,7 @@ class ContourFromCsv(DataFromCsv):
                 parts = [before, after]
             return self.getLHL(P) + [self.recursiveTones(part) for part in parts if part]
 
-    def flattener(self,S): # http://stackoverflow.com/users/307705/mu-mind, http://tinyurl.com/z25rxro
+    def flattener(self,S):
         if S == []:
             return S
         if isinstance(S[0], list):
@@ -396,7 +403,7 @@ class ContourFromCsv(DataFromCsv):
         #tone_sequence = sorted(self.flattener(tone_extraction),key=lambda x: x[0][1])#, reverse=True)
         tone_sequence = self.flattener(tone_extraction)
         tone_sequence = self.cleanUpTones(tone_sequence)
-        tone_sequence = self.limitToneNumber(tone_sequence, gp_number_of_tones)
+        tone_sequence = self.limitToneNumber(tone_sequence, printConfig.gp_number_of_tones)
         #print(tone_sequence)
         tone_points =   [point for tone in tone_sequence for point in tone]
         tone_points = sorted(list(set(tone_points)),key=lambda x: x[1])#, reverse=True)
@@ -411,7 +418,15 @@ class ContourFromCsv(DataFromCsv):
 #   movement detection tools
 #
     def mvtDetectionScan(self):
-        fo_list = self.scaleFoPCT()
+        print('>>>>>>>>>>>>>>>>>>>>', printConfig.scalingMethod)
+        if printConfig.scalingMethod == 'PCT':
+            fo_list = self.scaleFoPCT()
+        elif printConfig.scalingMethod == 'ERB':
+            fo_list = self.scaleFoERB()
+        elif printConfig.scalingMethod == 'BRK':
+            fo_list = self.scaleFoBARK()
+        elif printConfig.scalingMethod == 'MEL':
+            fo_list = self.scaleFoMEL()
         time_list = self.scaleTimePCT()
         list_length = len(fo_list)
         #print(len(time_list),len(fo_list))
@@ -459,11 +474,11 @@ class ContourFromCsv(DataFromCsv):
 
     def printToWeb(self):    # writes data into php file to be used
                                         # for front-end visualization
-        gp_name = self.getTokenTag()
+        printConfig.gp_name = self.get_token_tag()
         # RAW SCAN
         mvt_list = self.mvtDetectionScan()[0]
-        #print(self.getTokenTag() + " has " + str(len(mvt_list)) + " turning points.")
-        mydata = "/opt/lampp/htdocs/oftenback_may2017/linguistics/raw_scan.php"
+        #print(self.get_token_tag() + " has " + str(len(mvt_list)) + " turning points.")
+        mydata = "/var/www/html/linguistics/raw_scan.php"
         with open(mydata, 'w') as myphpfile:
             #add line data
             myphpfile.write("var lineData = [  \n")
@@ -479,7 +494,7 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile.write(row)
             myphpfile.write(" ];")
             #add title variable
-            myphpfile.write("\n var title = '" + gp_name + "';")
+            myphpfile.write("\n var title = '" + printConfig.gp_name + "';")
             #add fo stats variables
             stats = self.getFoStats()
             myphpfile.write("\n var fo_mean = '" + str(int(stats[0])) + "';")
@@ -490,7 +505,7 @@ class ContourFromCsv(DataFromCsv):
         #    print('[{}, {}],'.format(attribute, round(320 - value,0)))
 
         # PRETONES
-        mydata_b = "/opt/lampp/htdocs/oftenback_may2017/linguistics/pretones.php"
+        mydata_b = "/var/www/html/linguistics/pretones.php"
         pretones_data = self.getPretones()
         with open(mydata_b, 'w') as myphpfile_b:
             #add line data
@@ -513,11 +528,11 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile_b.write(row)
             myphpfile_b.write(" ];")
             #add title variable
-            myphpfile_b.write("\n var title = '" + gp_name + "';")
+            myphpfile_b.write("\n var title = '" + printConfig.gp_name + "';")
         myphpfile_b.close()
 
     # TONES
-        mydata_c = "/opt/lampp/htdocs/oftenback_may2017/linguistics/tones.php"
+        mydata_c = "/var/www/html/linguistics/tones.php"
         tones_data = self.getTones()
         with open(mydata_c, 'w') as myphpfile_c:
             #add line data
@@ -540,13 +555,13 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile_c.write(row)
             myphpfile_c.write(" ];")
             #add title variable
-            myphpfile_c.write("\n var title = '" + gp_name + "';")
-            myphpfile_c.write("\n var toneNumber = '" + gp_number_of_tones + "';")
+            myphpfile_c.write("\n var title = '" + printConfig.gp_name + "';")
+            myphpfile_c.write("\n var toneNumber = '" + printConfig.gp_number_of_tones + "';")
 
         myphpfile_c.close()
 
  ################################
-        transitionData = "/opt/lampp/htdocs/oftenback_may2017/linguistics/printVizData.php"
+        transitionData = "/var/www/html/linguistics/printVizData.php"
         raw_data = list(zip(self.csvToLists()[0],self.csvToLists()[1]))
         print("len raw = ", len(raw_data) )
         #print('raw data', raw_data)
@@ -588,7 +603,7 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile.write(row)
             myphpfile.write(" ];")
             #add title variable
-            myphpfile.write("\n var title = '" + gp_name + "';")
+            myphpfile.write("\n var title = '" + printConfig.gp_name + "';")
             #add fo stats variables
             stats = self.getFoStats()
             myphpfile.write("\n var fo_mean = '" + str(int(stats[0])) + "';")
@@ -690,7 +705,7 @@ class ContourFromCsv(DataFromCsv):
                 myphpfile.write(row)
             myphpfile.write(" ];")
             #add title variable
-            myphpfile.write("\n var toneNumber = '" + gp_number_of_tones + "';")
+            myphpfile.write("\n var toneNumber = '" + printConfig.gp_number_of_tones + "';")
         myphpfile.close()
 
 
@@ -735,8 +750,6 @@ class ContourFromCsv(DataFromCsv):
         v = list(d.values())
         k = list(d.keys())
         return (max(v), k[v.index(max(v))])
-
-
 
     def median(self,values):
         n = len(values)
@@ -840,165 +853,201 @@ class ContourFromCsv(DataFromCsv):
 
 
 
+######################################################################
+##
+#   FiLE PROCESSING
+#
+def fileModeProcessing(targetFolder, chosenScaling):
+    token = ContourFromCsv("./questionData/PO/foCsv/PO" + printConfig.gp_name + ".csv", "./questionData/PO/syllabletime.txt", "./questionData/PO/starttimes.txt", printConfig.gp_number_of_frames)
+    table_data = [
+        [token.get_token_tag(), ''],
+        ['fo stats', (round(token.getFoStats()[0],2),round(token.getFoStats()[1],2),round(token.getFoStats()[2],2))],
+        ['longest syllable', (round(token.getLongestSyllable()[0],2), token.getLongestSyllable()[1])],
+        ['start time', round(token.getLeftmostBoundary(),2)],
+        ['sample duration', round(token.overallDurations()[0],2)],
+        ['token duration', round(token.overallDurations()[1],2)],
+        ['token != sample', token.overallDurations()[2]]
+    ]
+    table = AsciiTable(table_data)
+    print(table.table)
+    token.printToWeb()
+
+    pause()
 
 
 
 
-# TESTING #
-token = ContourFromCsv("./questionData/PO/foCsv/PO" + gp_name + ".csv", "./questionData/PO/syllabletime.txt", "./questionData/PO/starttimes.txt")
-#print(token.csvToLists())
-#print(token.retrieveSpans())
-#print("fo pct : ", token.scaleFoPCT())
-#print(token.scaleFoERB())
-#print("time pct : ", token.scaleTimePCT())
-#print(len(token.scaleFoPCT()))
-#print(len(token.scaleTimePCT()))
-#print("frame list: ", token.getFrameBoundaries(2.0))
-#print("RAW", token.getRawTimeValues())
-#print("TRIMMED", token.getTimeValues())
-#print("TRIM",token.trimSampleIndex())
-table_data = [
-    [token.getTokenTag(), ''],
-    ['fo stats', (round(token.getFoStats()[0],2),round(token.getFoStats()[1],2),round(token.getFoStats()[2],2))],
-    ['longest syllable', (round(token.getLongestSyllable()[0],2), token.getLongestSyllable()[1])],
-    ['start time', round(token.getLeftmostBoundary(),2)],
-    ['sample duration', round(token.overallDurations()[0],2)],
-    ['token duration', round(token.overallDurations()[1],2)],
-    ['token != sample', token.overallDurations()[2]]
-]
-table = AsciiTable(table_data)
-print(table.table)
-#print(token.retrieveSpans())
-#print("mvtdetec : ",token.mvtDetectionScan())
-#print(token.scaleTimeIsometric())
-#for x in token.getPretones():
-#    print(x)
-#print(token.getPretones(), len(token.getPretones()))
-#print(token.getTones(), len(token.getTones()))
-token.printToWeb()
-
-gp_batch_test = int(gp_batch)
-#folders = ['FL','AC','CA','CB','CJ','ED','EM','FF','GR','JC','JP','NB','PC','PM','PN','PO','RR','SV']
 
 
 
-folders = ['EM', 'ED', 'NB']
-
-totalLines = 0
-totalFiles = 0
-for folder in folders:
-    listing = os.listdir('./questionData/' + folder +'/foCsv')
-    #print(listing)
-    numFiles = len(listing)
-    totalFiles += numFiles
-    """
-    for fichier in listing:
-        if fichier == '.DS_Store':
-            pass
-        else:
-            target_file = './questionData/' + folder +'/foCsv/' + fichier
-            numLines = sum(1 for line in open(target_file))
-            print(target_file, numLines)
-            totalLines += numLines
-    """
-increment = totalFiles//50
-print(totalFiles, increment)
 
 
-if gp_batch_test == 1:
-    toolbar_width = 50
-    # setup toolbar
-    sys.stdout.write("\u25A0%s\u25A0" % (" " * toolbar_width))
-    sys.stdout.flush()
-    sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
-    tone_data = []
-    counter = 0
+
+######################################################################
+##
+#   RUN PRINT PROGRAM
+#
+if __name__ == "__main__":
+
+
+    #printConfig.gb_debug = 'debug'
+    #printConfig.gp_batch = '2'
+    #printConfig.gp_number_of_frames = '2'
+    #printConfig.gp_number_of_tones = '3'
+    #printConfig.gp_name = '14'
+
+    # TESTING #
+    token = ContourFromCsv("./questionData/EM/json/EM" + printConfig.gp_name + ".json", "./questionData/EM/syllabletime.csv", "./questionData/EM/starttimes.csv", printConfig.gp_number_of_frames)
+    table_data = [
+        [token.get_token_tag(), ''],
+        ['fo stats', (round(token.getFoStats()[0],2),round(token.getFoStats()[1],2),round(token.getFoStats()[2],2))],
+        ['longest syllable', (round(token.getLongestSyllable()[0],2), token.getLongestSyllable()[1])],
+        ['start time', round(token.getLeftmostBoundary(),2)],
+        ['sample duration', round(token.overallDurations()[0],2)],
+        ['token duration', round(token.overallDurations()[1],2)],
+        ['token != sample', token.overallDurations()[2]]
+    ]
+    table = AsciiTable(table_data)
+    print(table.table)
+    token.printToWeb()
+
+    printConfig.gp_batch_test = int(printConfig.gp_batch)
+    #folders = ['FL','AC','CA','CB','CJ','ED','EM','FF','GR','JC','JP','NB','PC','PM','PN','PO','RR','SV']
+
+
+
+    #folders = ['AC', 'EM', 'ED', 'NB']
+    folders = ['EM']
+
+
+    totalLines = 0
+    totalFiles = 0
     for folder in folders:
-        listing = os.listdir('./questionData/' + folder +'/foCsv')
+        listing = os.listdir('./questionData/' + folder +'/json')
+        numFiles = len(listing)
+        totalFiles += numFiles
+        """
         for fichier in listing:
-            if '.DS_Store' in fichier:
+            if fichier == '.DS_Store':
                 pass
             else:
                 target_file = './questionData/' + folder +'/foCsv/' + fichier
-                if gb_debug == 'debug':
-                    print(target_file, "_____________________________________________________________")
-                token = ContourFromCsv(target_file, "./questionData/" + folder +"/syllabletime.txt", "./questionData/" + folder +"/starttimes.txt")
-                token_data = token.getTones()
-                tone_data.append(token_data)
-                counter += 1
-                if counter % increment == 0:
-                        sys.stdout.write(u"\u25A1")
-                        sys.stdout.flush()
-    sys.stdout.write("\n")
-    #token.frequencyClassifier(tone_data)
-    time = token.unifiedGrader(tone_data,2)
-    fo = token.unifiedGrader(tone_data,3)
-
-    crispFo = fo[0]
-    crispTime = time[0]
-    """ element : (time,fo) """
-    crispAll = [(k, v, crispFo[k]) for k,v in crispTime.items() if k in crispFo]
-    crispAll = sorted(crispAll, key=lambda x:x[1])
-    print('crispall',crispAll)
-    timeList = [x[1] for x in crispAll]
-    foList = [x[2] for x in crispAll]
-    print('timelist',timeList)
-    print('folist',foList)
-
-    allTones = []
-
-    n = 1
-    while n <= int(gp_number_of_tones):
-        toneEls = []
-        for el in crispAll:
-            if el[0][-1] == str(n):
-                toneEls.append(el)
-        allTones.append(toneEls)
-        n += 1
-    #print(crispFo,crispTime)
-
-    print('alltones 1', allTones)
-    #allTonesFlattned = []
-    #for x in allTones:
-    #    for y in x:
-    #        allTonesFlattned.append(y)
-
-    allTonesFlattened = [y for x in allTones for y in x ]
-    print('alltones 2', allTonesFlattened)
-    allTonesFlattened = sorted(allTonesFlattened, key=itemgetter(1))
-    print('alltones 3', allTonesFlattened)
-
-    crispData = "/opt/lampp/htdocs/oftenback_may2017/linguistics/printVizDataContour.php"
-
-    with open(crispData, 'w') as myphpfile:
-        #add line data
-        myphpfile.write("var lineCrisp = [  \n")
-        for point in allTonesFlattened:
-            row = "[" + str(point[1] * 3.99 + 32) + ", " + str(217 - point[2]  * 1.8) +  "], \n"
-            myphpfile.write(row)
-        myphpfile.write(" ];")
-        #add boundary data
+                numLines = sum(1 for line in open(target_file))
+                print(target_file, numLines)
+                totalLines += numLines
         """
-        boundary_numbers = int(self.getTotalFrameNumber() + 1)
-        #target_frame_size = 100.0 / self.getTotalFrameNumber()
-        i = 1
-        boundaries = [0.0]
-        while i in range(boundary_numbers):
-            boundaries.append(i * float(target_frame_size))
-            i += 1
-        myphpfile.write("var boundaryTone = [  \n")
-        for position in boundaries:
-            row = "{ 'xa': " + str(position*3.99 + 32) + ", 'ya': " + "35" + ", 'xb': " + str(position*3.99 + 32) + ", 'yb' : " + "217" + " },\n"
-            myphpfile.write(row)
-        myphpfile.write(" ];")"""
+    increment = totalFiles//50
+    print(totalFiles, increment)
 
 
-        #myphpfile.write("var lineCrisp = [[ 39.495233422681714, 204.95213601196318 ],[ 42.94121181790261, 207.01321044971792 ],[ 46.38719021312351, 207.0150463757695 ],[ 49.833168608344394, 208.3591727612627 ]];")
-    myphpfile.close()
+    if printConfig.gp_batch_test == 1:
+        toolbar_width = 50
+        # setup toolbar
+        sys.stdout.write("\u25A0%s\u25A0" % (" " * toolbar_width))
+        sys.stdout.flush()
+        sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
+        tone_data = []
+        syllable_data_collection = []
+        all_boundaries = []
+        counter = 0
+        for folder in folders:
+            listing = os.listdir('./questionData/' + folder +'/json')
+            for fichier in listing:
+                if '.DS_Store' in fichier or '._' in fichier:
+                    pass
+                else:
+                    target_file = './questionData/' + folder +'/json/' + fichier
+                    if printConfig.gb_debug == 'debug':
+                        print(target_file, "_____________________________________________________________")
+                    token = ContourFromCsv(target_file, "./questionData/" + folder +"/syllabletime.csv", "./questionData/" + folder +"/starttimes.csv", printConfig.gp_number_of_frames)
+                    token_data = token.getTones()
+                    tone_data.append(token_data)
+
+                    longest_syllable_data = token.getLongestSyllable()
+                    syllable_data_collection.append(longest_syllable_data)
+
+                    syllables = token.retrieveSpans()
+                    x = len(syllables)
+                    all_boundaries.append(x)
+
+
+                    counter += 1
+                    if counter % increment == 0:
+                            sys.stdout.write(u"\u25A1")
+                            sys.stdout.flush()
+        sys.stdout.write("\n")
+        #token.frequencyClassifier(tone_data)
+        time = token.unifiedGrader(tone_data,2)
+        fo = token.unifiedGrader(tone_data,3)
+
+        crispFo = fo[0]
+        crispTime = time[0]
+        """ element : (time,fo) """
+        crispAll = [(k, v, crispFo[k]) for k,v in crispTime.items() if k in crispFo]
+        crispAll = sorted(crispAll, key=lambda x:x[1])
+        print('crispall',crispAll)
+        timeList = [x[1] for x in crispAll]
+        foList = [x[2] for x in crispAll]
+        print('timelist',timeList)
+        print('folist',foList)
+
+        allTones = []
+
+        n = 1
+        while n <= int(printConfig.gp_number_of_tones):
+            toneEls = []
+            for el in crispAll:
+                if el[0][-1] == str(n):
+                    toneEls.append(el)
+            allTones.append(toneEls)
+            n += 1
+        #print(crispFo,crispTime)
+
+        print('alltones 1', allTones)
+        #allTonesFlattned = []
+        #for x in allTones:
+        #    for y in x:
+        #        allTonesFlattned.append(y)
+
+        allTonesFlattened = [y for x in allTones for y in x ]
+        print('alltones 2', allTonesFlattened)
+        allTonesFlattened = sorted(allTonesFlattened, key=itemgetter(1))
+        print('alltones 3', allTonesFlattened)
+
+        print(syllable_data_collection)
+        print(all_boundaries)
+
+        crispData = "/var/www/html/linguistics/printVizDataContour.php"
+
+        with open(crispData, 'w') as myphpfile:
+            #add line data
+            myphpfile.write("var lineCrisp = [  \n")
+            for point in allTonesFlattened:
+                row = "[" + str(point[1] * 3.99 + 32) + ", " + str(217 - point[2]  * 1.8) +  "], \n"
+                myphpfile.write(row)
+            myphpfile.write(" ];")
+            #add boundary data
+            """
+            boundary_numbers = int(self.getTotalFrameNumber() + 1)
+            #target_frame_size = 100.0 / self.getTotalFrameNumber()
+            i = 1
+            boundaries = [0.0]
+            while i in range(boundary_numbers):
+                boundaries.append(i * float(target_frame_size))
+                i += 1
+            myphpfile.write("var boundaryTone = [  \n")
+            for position in boundaries:
+                row = "{ 'xa': " + str(position*3.99 + 32) + ", 'ya': " + "35" + ", 'xb': " + str(position*3.99 + 32) + ", 'yb' : " + "217" + " },\n"
+                myphpfile.write(row)
+            myphpfile.write(" ];")"""
+
+
+            #myphpfile.write("var lineCrisp = [[ 39.495233422681714, 204.95213601196318 ],[ 42.94121181790261, 207.01321044971792 ],[ 46.38719021312351, 207.0150463757695 ],[ 49.833168608344394, 208.3591727612627 ]];")
+        myphpfile.close()
 
 
 
-"""
-    #maxes = [max(toneElement, key=lambda x: x[1][0]) for toneElement in allTones]
-    #print(maxes)
-"""
+    """
+        #maxes = [max(toneElement, key=lambda x: x[1][0]) for toneElement in allTones]
+        #print(maxes)
+    """

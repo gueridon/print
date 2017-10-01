@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM16</id>
+  <time>
+    <fileduration>3.155</fileduration>
+    <sampleduration>1.3078088591967327</sampleduration>
+    <starttime>0.8947579743796722</starttime>
+  </time>
+  <transcription>Il nous reste en core du pain</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.16400860286343388</syllableduration>
+      <syllablestart>0.8947579743796722</syllablestart>
+      <syllabletext>Il</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.11714900204531009</syllableduration>
+      <syllablestart>1.058766577243106</syllablestart>
+      <syllabletext>nous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.32801720572686777</syllableduration>
+      <syllablestart>1.1759155792884162</syllablestart>
+      <syllabletext>reste</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.12992889317752554</syllableduration>
+      <syllablestart>1.503932785015284</syllablestart>
+      <syllabletext>en</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.1427087843097412</syllableduration>
+      <syllablestart>1.6338616781928095</syllablestart>
+      <syllabletext>core</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1256689294667872</syllableduration>
+      <syllablestart>1.7765704625025507</syllablestart>
+      <syllabletext>du</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3003274416070669</syllableduration>
+      <syllablestart>1.902239391969338</syllablestart>
+      <syllabletext>pain</syllabletext>
+    </syl>
+  </syllables>
+</sample>

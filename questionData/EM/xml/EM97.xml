@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM97</id>
+  <time>
+    <fileduration>3.373</fileduration>
+    <sampleduration>1.1579581027607058</sampleduration>
+    <starttime>1.3606719032213632</starttime>
+  </time>
+  <transcription>Tu co nnais son nu mé ro</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11165381395204332</syllableduration>
+      <syllablestart>1.3606719032213632</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.14226856939050658</syllableduration>
+      <syllablestart>1.4723257171734065</syllablestart>
+      <syllabletext>co</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.17828592872987548</syllableduration>
+      <syllablestart>1.6145942865639131</syllablestart>
+      <syllabletext>nnais</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.15127290922534864</syllableduration>
+      <syllablestart>1.7928802152937886</syllablestart>
+      <syllabletext>son</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.12786162565475934</syllableduration>
+      <syllablestart>1.9441531245191372</syllablestart>
+      <syllabletext>nu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.16567985296109633</syllableduration>
+      <syllablestart>2.0720147501738966</syllablestart>
+      <syllabletext>mé</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.2809354028470761</syllableduration>
+      <syllablestart>2.237694603134993</syllablestart>
+      <syllabletext>ro</syllabletext>
+    </syl>
+  </syllables>
+</sample>

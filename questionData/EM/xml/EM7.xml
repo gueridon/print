@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM7</id>
+  <time>
+    <fileduration>2.611</fileduration>
+    <sampleduration>1.1985281999473603</sampleduration>
+    <starttime>0.5611680879114882</starttime>
+  </time>
+  <transcription>Vous vou lez man ger chez moi</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.12971084415014722</syllableduration>
+      <syllablestart>0.5611680879114882</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.14527614544816492</syllableduration>
+      <syllablestart>0.6908789320616354</syllablestart>
+      <syllabletext>vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.10636289220312067</syllableduration>
+      <syllablestart>0.8361550775098003</syllablestart>
+      <syllabletext>lez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.15305879609717377</syllableduration>
+      <syllablestart>0.942517969712921</syllablestart>
+      <syllabletext>man</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.1608414467461825</syllableduration>
+      <syllablestart>1.0955767658100948</syllablestart>
+      <syllabletext>ger</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.16343566362918538</syllableduration>
+      <syllablestart>1.2564182125562773</syllablestart>
+      <syllabletext>chez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3398424116733858</syllableduration>
+      <syllablestart>1.4198538761854627</syllablestart>
+      <syllabletext>moi</syllabletext>
+    </syl>
+  </syllables>
+</sample>

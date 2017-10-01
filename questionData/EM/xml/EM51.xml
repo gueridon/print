@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM51</id>
+  <time>
+    <fileduration>3.047</fileduration>
+    <sampleduration>1.2033917258434652</sampleduration>
+    <starttime>1.11176696004219</starttime>
+  </time>
+  <transcription>Vous a vez pris la bonne taille</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.06890930273684659</syllableduration>
+      <syllablestart>1.11176696004219</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.12437288786650336</syllableduration>
+      <syllablestart>1.1806762627790366</syllablestart>
+      <syllabletext>a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.10252359675482037</syllableduration>
+      <syllablestart>1.30504915064554</syllablestart>
+      <syllabletext>vez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.18824004650065373</syllableduration>
+      <syllablestart>1.4075727474003603</syllablestart>
+      <syllabletext>pris</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.08067430564313738</syllableduration>
+      <syllablestart>1.595812793901014</syllablestart>
+      <syllabletext>la</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.2420229169294119</syllableduration>
+      <syllablestart>1.6764870995441514</syllablestart>
+      <syllabletext>bonne</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.39664866941209187</syllableduration>
+      <syllablestart>1.9185100164735633</syllablestart>
+      <syllabletext>taille</syllabletext>
+    </syl>
+  </syllables>
+</sample>

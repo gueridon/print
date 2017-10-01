@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM78</id>
+  <time>
+    <fileduration>3.264</fileduration>
+    <sampleduration>1.2316027499256648</sampleduration>
+    <starttime>0.8033021453224367</starttime>
+  </time>
+  <transcription>T'as de s é tu diants sym pa</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.0931304548554901</syllableduration>
+      <syllablestart>0.8033021453224367</syllablestart>
+      <syllabletext>T'as</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.14634785763005587</syllableduration>
+      <syllablestart>0.8964326001779268</syllablestart>
+      <syllabletext>de</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.13684474999174046</syllableduration>
+      <syllablestart>1.0427804578079827</syllablestart>
+      <syllabletext>s é</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.11973915624277298</syllableduration>
+      <syllablestart>1.1796252077997231</syllablestart>
+      <syllabletext>tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.17105593748967562</syllableduration>
+      <syllablestart>1.2993643640424961</syllablestart>
+      <syllabletext>diants</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.20906836804293705</syllableduration>
+      <syllablestart>1.4704203015321717</syllablestart>
+      <syllabletext>sym</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3554162256729927</syllableduration>
+      <syllablestart>1.6794886695751088</syllablestart>
+      <syllabletext>pa</syllabletext>
+    </syl>
+  </syllables>
+</sample>

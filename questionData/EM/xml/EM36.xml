@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM36</id>
+  <time>
+    <fileduration>3.591</fileduration>
+    <sampleduration>1.1120214382106959</sampleduration>
+    <starttime>1.350586279111546</starttime>
+  </time>
+  <transcription>Tu veux gar der les ti ckets</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11907656160459945</syllableduration>
+      <syllablestart>1.350586279111546</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.11715597190129956</syllableduration>
+      <syllablestart>1.4696628407161454</syllablestart>
+      <syllabletext>veux</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1978207394398992</syllableduration>
+      <syllablestart>1.586818812617445</syllablestart>
+      <syllabletext>gar</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.10947361308809955</syllableduration>
+      <syllablestart>1.7846395520573441</syllablestart>
+      <syllabletext>der</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.12291774101119946</syllableduration>
+      <syllablestart>1.8941131651454437</syllablestart>
+      <syllabletext>les</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1459648174507997</syllableduration>
+      <syllablestart>2.017030906156643</syllablestart>
+      <syllabletext>ti</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.29961199371479896</syllableduration>
+      <syllablestart>2.162995723607443</syllablestart>
+      <syllabletext>ckets</syllabletext>
+    </syl>
+  </syllables>
+</sample>

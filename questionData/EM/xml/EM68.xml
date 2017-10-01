@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM68</id>
+  <time>
+    <fileduration>4.026</fileduration>
+    <sampleduration>1.2194390413175824</sampleduration>
+    <starttime>1.2453355151846555</starttime>
+  </time>
+  <transcription>Vous co nnai ssez bien la ville</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.09100291353116297</syllableduration>
+      <syllablestart>1.2453355151846555</syllablestart>
+      <syllabletext>Vous</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.10515892230267698</syllableduration>
+      <syllablestart>1.3363384287158184</syllablestart>
+      <syllabletext>co</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1031366353353178</syllableduration>
+      <syllablestart>1.4414973510184954</syllablestart>
+      <syllabletext>nnai</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.16987210525817087</syllableduration>
+      <syllablestart>1.5446339863538132</syllablestart>
+      <syllabletext>ssez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.24671901001781915</syllableduration>
+      <syllablestart>1.714506091611984</syllablestart>
+      <syllabletext>bien</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.14964923558457888</syllableduration>
+      <syllablestart>1.9612251016298032</syllablestart>
+      <syllabletext>la</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.35390021928785576</syllableduration>
+      <syllablestart>2.110874337214382</syllablestart>
+      <syllabletext>ville</syllabletext>
+    </syl>
+  </syllables>
+</sample>

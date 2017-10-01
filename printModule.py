@@ -1,7 +1,7 @@
 # -*-coding:utf-8 -*
 
 # based on PRInt (Nicholas Bacuez, 2012)
-from printPatternReader import *
+from ToneFinder3 import *
 import printConfig
 
 import  sys, os, csv, pylab, math
@@ -60,10 +60,12 @@ def mainMenu():
     while mainMenuChoice != "6":
         mainMenuContent()
         mainMenuChoice = input("\n\t[choice] ")
-        if mainMenuChoice == "4":
-            cleanGraph()
+        if mainMenuChoice == "1":
+            fileMenu()
         if mainMenuChoice == "2":
             folderMenu()
+        if mainMenuChoice == "4":
+            cleanGraph()
         #fast mode for testing
         if mainMenuChoice == "f":
             printConfig.folderPath = "./EM/foCsv/"
@@ -74,6 +76,35 @@ def mainMenu():
     #clear screen and exit
     os.system('clear')
     sys.exit()
+
+######################################################################
+##
+#   FILE MENU
+#
+def fileMenuContent():
+    os.system('clear')
+    print("\n\t## PRInt - FILE MODE MENU ##\n")
+    print("\t[1] edit configuration")
+    print("\t[2] see configuration")
+    print("\t[3] process file")
+    print("\t[4] back to main menu")
+
+def fileMenu():
+    printConfig.processingOption = "file"
+    fileMenuChoice = ""
+    while fileMenuChoice != "4":
+        fileMenuContent()
+        fileMenuChoice = input("\n\t[choice] ")
+        if fileMenuChoice == "1":
+            editVariablePanel()
+        if fileMenuChoice == "2":
+            showVariablePanel()
+        if fileMenuChoice == "3":
+            fileModeProcessing(printConfig.folderPath, printConfig.scalingMethod)
+    # go back to main menu
+    mainMenu()
+
+
 
 ######################################################################
 ##
@@ -88,6 +119,7 @@ def folderMenuContent():
     print("\t[4] back to main menu")
 
 def folderMenu():
+    printConfig.processingOption = 'folder'
     folderMenuChoice = ""
     while folderMenuChoice != "4":
         folderMenuContent()
@@ -106,7 +138,7 @@ def folderMenu():
 #   VARIABLE PANEL
 #
 def editVariablePanel():
-    #check for presence of folder path, offers to change it
+    #check for presence of folder path, offer to change it
     if printConfig.folderPath != "":
         print("\n\tfolder path:\t", printConfig.folderPath)
         changePathYN = input("\twould you like to change it [y/n]?: ")
@@ -117,7 +149,26 @@ def editVariablePanel():
             pass
     else:
         getFolderPath()
-    #check for presence of scaling method, offers to change it
+
+    #check for presence of file name, offer to change it
+    if printConfig.processingOption == 'file':
+        if printConfig.gp_name != "":
+            print("\n\tfile name:\t", printConfig.gp_name)
+            changeNameYN = input("\twould you like to change it [y/n]?: ")
+            if changeNameYN == "y":
+                printConfig.gp_name = ""
+                getFileName()
+            else:
+                pass
+        else:
+            getFileName()
+
+
+
+
+
+
+    #check for presence of scaling method, offer to change it
     if printConfig.scalingMethod != "":
         print("\n\tscaling method:\t", printConfig.scalingMethod)
         changeScalingYN = input("\twould you like to change it [y/n]?: ")
@@ -129,7 +180,7 @@ def editVariablePanel():
     else:
         getScalingChoice()
 
-    #check for presence of graph output choice, offers to change it
+    #check for presence of graph output choice, offer to change it
     if printConfig.graphOutput != "":
         print("\n\toutput graphs:\t", printConfig.graphOutput)
         changeGraphOptionYN = input("\twould you like to change it [y/n]?: ")
@@ -140,6 +191,10 @@ def editVariablePanel():
             pass
     else:
         getGraphOption()
+
+def getFileName():
+    printConfig.gp_name = input("\n\tType in the name to the file:\n\t> ")
+
 
 def getFolderPath():
     while not os.path.isdir(printConfig.folderPath):
@@ -177,9 +232,13 @@ def getGraphOption():
 def showVariablePanel():
     print("\n\t-- variable panel --\n")
     print("\tfolder path: ", bcolors.HEADER + printConfig.folderPath + bcolors.ENDC)
+    if printConfig.processingOption == 'file':
+        print("\tfile name: ", bcolors.HEADER + printConfig.gp_name + bcolors.ENDC)
     print("\tscaling method: ", bcolors.HEADER + printConfig.scalingMethod + bcolors.ENDC)
     print("\tgraphs: ", bcolors.HEADER + printConfig.graphOutput + bcolors.ENDC)
     pause()
+
+
 
 ######################################################################
 ##

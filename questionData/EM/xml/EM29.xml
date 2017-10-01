@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM29</id>
+  <time>
+    <fileduration>2.720</fileduration>
+    <sampleduration>1.2106268188509999</sampleduration>
+    <starttime>0.7142563771457092</starttime>
+  </time>
+  <transcription>Tu vas pou voir la gar der</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.14322147633728344</syllableduration>
+      <syllablestart>0.7142563771457092</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.17294668840728578</syllableduration>
+      <syllablestart>0.8574778534829927</syllablestart>
+      <syllabletext>vas</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.13241230831182804</syllableduration>
+      <syllablestart>1.0304245418902784</syllablestart>
+      <syllabletext>pou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.15132835235637487</syllableduration>
+      <syllablestart>1.1628368502021065</syllablestart>
+      <syllabletext>voir</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.10538938824818977</syllableduration>
+      <syllablestart>1.3141652025584813</syllablestart>
+      <syllabletext>la</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.2080764844900156</syllableduration>
+      <syllablestart>1.4195545908066711</syllablestart>
+      <syllabletext>gar</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.29725212070002227</syllableduration>
+      <syllablestart>1.6276310752966867</syllablestart>
+      <syllabletext>der</syllabletext>
+    </syl>
+  </syllables>
+</sample>

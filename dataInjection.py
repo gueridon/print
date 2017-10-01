@@ -1,55 +1,56 @@
-import  sys, os, csv, pylab, math
+import  sys, os, csv, pylab, math, json
 
 class DataFromCsv(object):
 
-    def __init__(self,fo_time_csv, syllable_csv, tokens_origin_csv):
-        self.fo_time = fo_time_csv
+    def __init__(self,json_file, syllable_csv, tokens_origin_csv):
+        self.json_file = json_file
         self.spans = syllable_csv
         self.origins = tokens_origin_csv
 
-    def getTokenTag(self):
-        base = os.path.basename(self.fo_time)
+    def get_token_tag(self):
+        base = os.path.basename(self.json_file)
         tag = os.path.splitext(base)[0]
         return tag
 
-
-    # Contours saved as two-column csv files (time, fo)
     def csvToLists(self):
-        time_list = []
-        fo_list = []
-        with open(self.fo_time, mode='rU') as f:
-            reader = csv.reader(f)
-            for num, row in enumerate(reader):
-                time = row[0]
-                fo = row[1]
-                time_list.append(float(time))
-                fo_list.append(float(fo))
-        return [time_list, fo_list]
+        TimeList = []
+        FoList = []
+        with open(self.json_file) as f:
+            data = f.read()
+            JsonData = json.loads(data)
+        ContourData = JsonData["ContourData"]
+        for key, value in ContourData.items():
+            time = key.strip()
+            fo = value.strip()
+            TimeList.append(float(time))
+            FoList.append(float(fo))
+        return [TimeList, FoList]
 
     # Syllable spans in a single file: sampleTag, syllable position, duration
     def retrieveSpans(self):
-        spans_list = []
+        SpansList = []
         with open(self.spans, mode='rU') as f:
-            reader = csv.reader(f,delimiter='\t')
+            reader = csv.reader(f,delimiter=',')
             next(reader)
             for num, row in enumerate(reader):
-                if row[0] == self.getTokenTag():
-                    spans_list.append(str(row[2]))
-        return spans_list
+                if row[0] == self.get_token_tag():
+                    SpansList.append(str(row[2]))
+        return SpansList
 
     def getStartTime(self):
         with open(self.origins, mode='rU') as f:
-            reader = csv.reader(f,delimiter='\t')
+            reader = csv.reader(f,delimiter=',')
             next(reader)
 
-            tag_row = []
+            TagRow = []
             for row in reader:
                 #print("row",row)
-                if row[0] == self.getTokenTag():
-                    tag_row.append(row)
+                if row[0] == self.get_token_tag():
+                    TagRow.append(row)
 
-            #tag_row = [row for row in reader if row[0] == self.getTokenTag()]
-            return float(tag_row[0][2])
+            #TagRow = [row for row in reader if row[0] == self.get_token_tag()]
+            #print('la valeur', TagRow)
+            return float(TagRow[0][1])
 
 """
     def getOriginalValues(self):
@@ -68,14 +69,14 @@ class DataFromCsv(object):
         return list_of_values
 
             def csvToLists(self):
-                time_list = []
-                fo_list = []
+                TimeList = []
+                FoList = []
                 with open(self.contour, mode='rU') as f:
                     reader = csv.reader(f)
                     for num, row in enumerate(reader):
                         time = row[0]
                         fo = row[1]
-                        time_list.append(float(time))
-                        fo_list.append(float(fo))
-                return [time_list, fo_list]
+                        TimeList.append(float(time))
+                        FoList.append(float(fo))
+                return [TimeList, FoList]
 """

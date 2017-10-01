@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM69</id>
+  <time>
+    <fileduration>3.808</fileduration>
+    <sampleduration>1.2282226644641303</sampleduration>
+    <starttime>1.3417679192372531</starttime>
+  </time>
+  <transcription>il a fi ni son tra vail</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11825087294484016</syllableduration>
+      <syllablestart>1.3417679192372531</syllablestart>
+      <syllabletext>il</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.07540635376192717</syllableduration>
+      <syllablestart>1.4600187921820933</syllablestart>
+      <syllabletext>a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.14738514598922126</syllableduration>
+      <syllablestart>1.5354251459440205</syllablestart>
+      <syllabletext>fi</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.13710246138532156</syllableduration>
+      <syllablestart>1.6828102919332417</syllablestart>
+      <syllabletext>ni</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.16109539212775337</syllableduration>
+      <syllablestart>1.8199127533185633</syllablestart>
+      <syllabletext>son</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1662367344297031</syllableduration>
+      <syllablestart>1.9810081454463166</syllablestart>
+      <syllabletext>tra</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.4227457038253637</syllableduration>
+      <syllablestart>2.1472448798760198</syllablestart>
+      <syllabletext>vail</syllabletext>
+    </syl>
+  </syllables>
+</sample>

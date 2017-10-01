@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM101</id>
+  <time>
+    <fileduration>4.896</fileduration>
+    <sampleduration>1.315226111727522</sampleduration>
+    <starttime>1.9526636000558697</starttime>
+  </time>
+  <transcription>T'as pré pa ré leur goû ter</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11533180069111504</syllableduration>
+      <syllablestart>1.9526636000558697</syllablestart>
+      <syllabletext>T'as</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.17965145876885202</syllableduration>
+      <syllablestart>2.0679954007469847</syllablestart>
+      <syllabletext>pré</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1641260240604323</syllableduration>
+      <syllablestart>2.2476468595158368</syllablestart>
+      <syllabletext>pa</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.15525434708419317</syllableduration>
+      <syllablestart>2.411772883576269</syllablestart>
+      <syllabletext>ré</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.15081850859607338</syllableduration>
+      <syllablestart>2.5670272306604622</syllablestart>
+      <syllabletext>leur</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.17743353952479213</syllableduration>
+      <syllablestart>2.7178457392565356</syllablestart>
+      <syllabletext>goû</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.37261043300206387</syllableduration>
+      <syllablestart>2.8952792787813277</syllablestart>
+      <syllabletext>ter</syllabletext>
+    </syl>
+  </syllables>
+</sample>

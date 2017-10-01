@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM76</id>
+  <time>
+    <fileduration>3.047</fileduration>
+    <sampleduration>1.2439156539277554</sampleduration>
+    <starttime>1.2902674748115883</starttime>
+  </time>
+  <transcription>Vou s a llez pa sser plus tard</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.1785669673521597</syllableduration>
+      <syllablestart>1.2902674748115883</syllablestart>
+      <syllabletext>Vou</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.1210623507472266</syllableduration>
+      <syllablestart>1.468834442163748</syllablestart>
+      <syllabletext>s a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.10592955690382344</syllableduration>
+      <syllablestart>1.5898967929109746</syllablestart>
+      <syllabletext>llez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.13014202705326894</syllableduration>
+      <syllablestart>1.695826349814798</syllablestart>
+      <syllabletext>pa</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.16948729104611737</syllableduration>
+      <syllablestart>1.825968376868067</syllablestart>
+      <syllabletext>sser</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.18462008488952075</syllableduration>
+      <syllablestart>1.9954556679141844</syllablestart>
+      <syllabletext>plus</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.35410737593563857</syllableduration>
+      <syllablestart>2.180075752803705</syllablestart>
+      <syllabletext>tard</syllabletext>
+    </syl>
+  </syllables>
+</sample>

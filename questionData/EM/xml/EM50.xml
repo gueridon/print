@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM50</id>
+  <time>
+    <fileduration>2.720</fileduration>
+    <sampleduration>1.2071704052976668</sampleduration>
+    <starttime>1.087926795570888</starttime>
+  </time>
+  <transcription>Tu veux qu’on ra mène du vin</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11340481410239711</syllableduration>
+      <syllablestart>1.087926795570888</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.1307885321647988</syllableduration>
+      <syllablestart>1.2013316096732851</syllablestart>
+      <syllabletext>veux</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1292315258295036</syllableduration>
+      <syllablestart>1.332120141838084</syllablestart>
+      <syllabletext>qu’on</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.12144649415302733</syllableduration>
+      <syllablestart>1.4613516676675875</syllablestart>
+      <syllabletext>ra</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.228879931288398</syllableduration>
+      <syllablestart>1.5827981618206148</syllablestart>
+      <syllabletext>mène</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.14013057017657005</syllableduration>
+      <syllablestart>1.8116780931090128</syllablestart>
+      <syllabletext>du</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.34328853758297195</syllableduration>
+      <syllablestart>1.951808663285583</syllablestart>
+      <syllabletext>vin</syllabletext>
+    </syl>
+  </syllables>
+</sample>

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM19</id>
+  <time>
+    <fileduration>2.067</fileduration>
+    <sampleduration>1.2568875247952187</sampleduration>
+    <starttime>0.5305113258581232</starttime>
+  </time>
+  <transcription>Tu sais par ler por tu gais</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.10268688928065517</syllableduration>
+      <syllablestart>0.5305113258581232</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.1581378094922089</syllableduration>
+      <syllablestart>0.6331982151387784</syllablestart>
+      <syllabletext>sais</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.17456771177711372</syllableduration>
+      <syllablestart>0.7913360246309873</syllablestart>
+      <syllabletext>par</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.1951050896332448</syllableduration>
+      <syllablestart>0.965903736408101</syllablestart>
+      <syllabletext>ler</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.12322426713678603</syllableduration>
+      <syllablestart>1.1610088260413458</syllablestart>
+      <syllabletext>por</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1273317427080125</syllableduration>
+      <syllablestart>1.2842330931781318</syllablestart>
+      <syllabletext>tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3758340147671977</syllableduration>
+      <syllablestart>1.4115648358861443</syllablestart>
+      <syllabletext>gais</syllabletext>
+    </syl>
+  </syllables>
+</sample>

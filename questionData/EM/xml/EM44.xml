@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM44</id>
+  <time>
+    <fileduration>3.047</fileduration>
+    <sampleduration>1.307367532259348</sampleduration>
+    <starttime>1.234568465321171</starttime>
+  </time>
+  <transcription>Tu m'as ren du mon sty lo</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.12268014658456061</syllableduration>
+      <syllablestart>1.234568465321171</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.12451119354850926</syllableduration>
+      <syllablestart>1.3572486119057317</syllablestart>
+      <syllabletext>m'as</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.175780508539072</syllableduration>
+      <syllablestart>1.481759805454241</syllablestart>
+      <syllabletext>ren</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.2014151660343535</syllableduration>
+      <syllablestart>1.657540313993313</syllablestart>
+      <syllabletext>du</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.13732852229615</syllableduration>
+      <syllablestart>1.8589554800276664</syllablestart>
+      <syllabletext>mon</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.21423249478199402</syllableduration>
+      <syllablestart>1.9962840023238164</syllablestart>
+      <syllabletext>sty</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3314195004747087</syllableduration>
+      <syllablestart>2.2105164971058104</syllablestart>
+      <syllabletext>lo</syllabletext>
+    </syl>
+  </syllables>
+</sample>

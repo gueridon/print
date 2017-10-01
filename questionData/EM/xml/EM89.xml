@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM89</id>
+  <time>
+    <fileduration>3.482</fileduration>
+    <sampleduration>1.3148776023774</sampleduration>
+    <starttime>0.9509035768492614</starttime>
+  </time>
+  <transcription>Elle a sui vi ses con seils</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11095017470689006</syllableduration>
+      <syllablestart>0.9509035768492614</syllablestart>
+      <syllabletext>Elle</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.08970439657152829</syllableduration>
+      <syllablestart>1.0618537515561515</syllablestart>
+      <syllabletext>a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.19593328724833792</syllableduration>
+      <syllablestart>1.1515581481276798</syllablestart>
+      <syllabletext>sui</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.17232686709793565</syllableduration>
+      <syllablestart>1.3474914353760177</syllablestart>
+      <syllabletext>vi</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.1487204469475336</syllableduration>
+      <syllablestart>1.5198183024739533</syllablestart>
+      <syllabletext>ses</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.1770481511280162</syllableduration>
+      <syllablestart>1.668538749421487</syllablestart>
+      <syllabletext>con</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.4201942786771584</syllableduration>
+      <syllablestart>1.8455869005495031</syllablestart>
+      <syllabletext>seils</syllabletext>
+    </syl>
+  </syllables>
+</sample>

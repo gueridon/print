@@ -24,5 +24,5 @@ entPassword.pack(side=tkinter.LEFT)
 #create a button widget called btn
 btn = tkinter.Button(window, text="Login", fg="#a1dbcd", bg="#383a39")
 #pack the widget into the window
-btn.pack()
+btn.pack(side=tkinter.LEFT)
 window.mainloop()

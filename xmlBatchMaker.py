@@ -172,7 +172,7 @@ for wav in os.listdir(audioFolder):
 
 
 
-        
+
 
         c.execute("DROP TABLE IF EXISTS "+ baseName)
         c.execute("CREATE TABLE "+ baseName +" (syllable TEXT PRIMARY KEY, duration REAL)")

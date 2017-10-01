@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM94</id>
+  <time>
+    <fileduration>3.373</fileduration>
+    <sampleduration>1.265889183717803</sampleduration>
+    <starttime>0.8633771061619087</starttime>
+  </time>
+  <transcription>Il faut a voir un passe port</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.07750341941129402</syllableduration>
+      <syllablestart>0.8633771061619087</syllablestart>
+      <syllabletext>Il</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.1927649149460391</syllableduration>
+      <syllablestart>0.9408805255732027</syllablestart>
+      <syllabletext>faut</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.089427022397647</syllableduration>
+      <syllablestart>1.1336454405192418</syllablestart>
+      <syllabletext>a</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.2086630522611761</syllableduration>
+      <syllablestart>1.2230724629168888</syllablestart>
+      <syllabletext>voir</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.10731242687717635</syllableduration>
+      <syllablestart>1.4317355151780649</syllablestart>
+      <syllabletext>un</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.24642112838462737</syllableduration>
+      <syllablestart>1.5390479420552412</syllablestart>
+      <syllabletext>passe</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3437972194398431</syllableduration>
+      <syllablestart>1.7854690704398686</syllablestart>
+      <syllabletext>port</syllabletext>
+    </syl>
+  </syllables>
+</sample>

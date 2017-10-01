@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM47</id>
+  <time>
+    <fileduration>2.394</fileduration>
+    <sampleduration>1.1652323695830336</sampleduration>
+    <starttime>0.9757394856369616</starttime>
+  </time>
+  <transcription>T'es pa ssé par l'au to route</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.07371878256545716</syllableduration>
+      <syllablestart>0.9757394856369616</syllablestart>
+      <syllabletext>T'es</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.1379254641547265</syllableduration>
+      <syllablestart>1.0494582682024187</syllablestart>
+      <syllabletext>pa</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.15932769135114944</syllableduration>
+      <syllablestart>1.1873837323571452</syllablestart>
+      <syllabletext>ssé</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.14030348939877357</syllableduration>
+      <syllablestart>1.3467114237082947</syllablestart>
+      <syllabletext>par</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.12365731269044433</syllableduration>
+      <syllablestart>1.4870149131070682</syllablestart>
+      <syllabletext>l'au</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.17597386805947846</syllableduration>
+      <syllablestart>1.6106722257975126</syllablestart>
+      <syllabletext>to</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.3543257613630042</syllableduration>
+      <syllablestart>1.786646093856991</syllablestart>
+      <syllabletext>route</syllabletext>
+    </syl>
+  </syllables>
+</sample>

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<sample>
+  <!--nicholas bacuez-->
+  <id>EM49</id>
+  <time>
+    <fileduration>2.503</fileduration>
+    <sampleduration>1.1065944981606906</sampleduration>
+    <starttime>1.228108718334791</starttime>
+  </time>
+  <transcription>Tu veux tra va iller chez moi</transcription>
+  <syllables>
+    <syl>
+      <syllableRef>1</syllableRef>
+      <syllableduration>0.11845236881720056</syllableduration>
+      <syllablestart>1.228108718334791</syllablestart>
+      <syllabletext>Tu</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>2</syllableRef>
+      <syllableduration>0.11377661741652179</syllableduration>
+      <syllablestart>1.3465610871519915</syllablestart>
+      <syllabletext>veux</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>3</syllableRef>
+      <syllableduration>0.1698856342246693</syllableduration>
+      <syllablestart>1.4603377045685133</syllablestart>
+      <syllabletext>tra</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>4</syllableRef>
+      <syllableduration>0.11221803361629545</syllableduration>
+      <syllablestart>1.6302233387931826</syllablestart>
+      <syllabletext>va</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>5</syllableRef>
+      <syllableduration>0.13247962301923755</syllableduration>
+      <syllablestart>1.742441372409478</syllablestart>
+      <syllabletext>iller</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>6</syllableRef>
+      <syllableduration>0.16832705042444296</syllableduration>
+      <syllablestart>1.8749209954287156</syllablestart>
+      <syllabletext>chez</syllabletext>
+    </syl>
+    <syl>
+      <syllableRef>7</syllableRef>
+      <syllableduration>0.29145517064232296</syllableduration>
+      <syllablestart>2.043248045853159</syllablestart>
+      <syllabletext>moi</syllabletext>
+    </syl>
+  </syllables>
+</sample>
